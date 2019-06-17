@@ -56,6 +56,7 @@ class Login(Resource):
                 return jsonify({'statusCode': 600, 'username': tok.nome_bar})
         else:
             print('Auth Stu/Doc')
+            print(response.json())
             return jsonify({'response': response.json()})
 
 
@@ -196,7 +197,6 @@ class CurrentAA(Resource):
             "Authorization": "Basic " + token
         }
         response = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + examId, headers=headers)
-        _response = response.json()
 
         if response.status_code == 500:
             return jsonify({'stato': "Indefinito",
@@ -205,15 +205,26 @@ class CurrentAA(Resource):
                             'lode': 0,
                             'voto': "OK",
                             })
-        elif _response['statoDes'] == "Superata":
-            return jsonify({'stato': _response['statoDes'],
+        else:
+            _response = response.json()
+
+            if len(_response) == 0:
+                return jsonify({
+                    'stato': "Indefinito",
+                    'tipo': "",
+                    'data': "",
+                    'lode': 0,
+                    'voto': "OK"
+                    })
+            elif _response['statoDes'] == "Superata":
+                return jsonify({'stato': _response['statoDes'],
                             'tipo': _response['tipoInsDes'],
                             'data': _response['esito']['dataEsa'].split()[0],
                             'lode': _response['esito']['lodeFlg'],
                             'voto': _response['esito']['voto'],
                             })
-        else:
-            return jsonify({'stato': _response['statoDes'],
+            else:
+                return jsonify({'stato': _response['statoDes'],
                             'tipo': _response['tipoInsDes'],
                             'data': _response['esito']['dataEsa'],
                             'lode': _response['esito']['lodeFlg'],
@@ -431,46 +442,57 @@ class CurrentAA(Resource):
                 adId = str(_response['attivita'][i]['chiaveADContestualizzata']['adId'])
                 adSceId = _response['attivita'][i]['adsceAttId']
                 response_2 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId), headers=headers)
-                _response2 = response_2.json()
 
                 if response_2.status_code == 500:
                     print('ERRORE 500')
+                else:
+                    _response2 = response_2.json()
 
-                elif _response2['statoDes'] != "Superata":
+                    if _response2['statoDes'] != "Superata" and len(_response2) != 0:
+                        print("ADID="+ adId)
+                        print("ADSCEID="+str(adSceId))
 
-                    response_3 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(
+                        response_3 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(
                                                       adSceId)+"/partizioni", headers=headers)
-                    _response3 = response_3.json()
-                    if response_3.status_code == 500 or response_3.status_code == 404:
-                        print('ERRORE 500')
-                    else:
-                        response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId,
+                        
+                        if response_3.status_code == 500 or response_3.status_code == 404:
+                            print('Response 3 non idoneo!skip')
+                        else:
+                            _response3 = response_3.json()
+
+                            if len(_response3)==0:
+                                print("Response3 non idoneo")
+
+                            else:
+
+                                response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId,
                                                     headers=headers)
-                        _response4 = response_4.json()
+                                _response4 = response_4.json()
 
-                        max_year = 0
-                        if response_4.status_code == 200:
-                            for x in range(0, len(_response4)):
-                                if _response4[x]['chiaveADFisica']['aaOffId'] > max_year:
-                                    max_year = _response4[x]['chiaveADFisica']['aaOffId']
+                                max_year = 0
+                                print('PROSEGUO')
+                                if response_4.status_code == 200:
+                                    for x in range(0, len(_response4)):
+                                        if _response4[x]['chiaveADFisica']['aaOffId'] > max_year:
+                                            max_year = _response4[x]['chiaveADFisica']['aaOffId']
 
-                            for x in range(0, len(_response4)):
-                                if _response4[x]['chiaveADFisica']['aaOffId'] == max_year:
-                                    actual_exam = ({
-                                        'nome': _response['attivita'][i]['adLibDes'],
-                                        'codice': _response['attivita'][i]['adLibCod'],
-                                        'adId': _response['attivita'][i]['chiaveADContestualizzata']['adId'],
-                                        'CFU': _response['attivita'][i]['peso'],
-                                        'annoId': _response['attivita'][i]['scePianoId'],
-                                        'docente': _response3[0]['cognomeDocTit'].capitalize() + " " + _response3[0]['nomeDoctit'].capitalize(),
-                                        'docenteID': _response3[0]['docenteId'],
-                                        'semestre': _response3[0]['partEffCod'],
-                                        'adLogId': _response4[x]['chiavePartizione']['adLogId'],
-                                        'inizio': _response4[x]['dataInizio'].split()[0],
-                                        'fine': _response4[x]['dataFine'].split()[0],
-                                        'ultMod': _response4[x]['dataModLog'].split()[0]
-                                    })
-                                    my_exams.append(actual_exam)
+                                    for x in range(0, len(_response4)):
+                                        if _response4[x]['chiaveADFisica']['aaOffId'] == max_year:
+                                            actual_exam = ({
+                                                'nome': _response['attivita'][i]['adLibDes'],
+                                                'codice': _response['attivita'][i]['adLibCod'],
+                                                'adId': _response['attivita'][i]['chiaveADContestualizzata']['adId'],
+                                                'CFU': _response['attivita'][i]['peso'],
+                                                'annoId': _response['attivita'][i]['scePianoId'],
+                                                'docente': _response3[0]['cognomeDocTit'].capitalize() + " " + _response3[0]['nomeDoctit'].capitalize(),
+                                                'docenteID': _response3[0]['docenteId'],
+                                                'semestre': _response3[0]['partEffCod'],
+                                                'adLogId': _response4[x]['chiavePartizione']['adLogId'],
+                                                'inizio': _response4[x]['dataInizio'].split()[0],
+                                                'fine': _response4[x]['dataFine'].split()[0],
+                                                'ultMod': _response4[x]['dataModLog'].split()[0]
+                                            })
+                                            my_exams.append(actual_exam)
         return jsonify(my_exams)
 
 '''
@@ -755,4 +777,3 @@ def error_response(status_code, message=None):
 
 if __name__ == '__main__':
     app.run(ssl_context='adhoc')
-
