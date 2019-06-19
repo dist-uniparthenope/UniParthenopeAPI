@@ -8,6 +8,7 @@ import requests
 import json
 
 import os
+UPLOAD_FOLDER = '/files'
 
 app = Flask(__name__)
 url = "https://uniparthenope.esse3.cineca.it/e3rest/api/"
@@ -34,6 +35,7 @@ def configure_app(app):
 
 
 configure_app(app)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 api = Api(app)
 
@@ -498,17 +500,7 @@ class CurrentAA(Resource):
 '''
 AREA RISTORANTI
 '''
-from models import User,Food
-
-##TODO inserire token
-@api.route('/api/uniparthenope/foods/login/<username>/<password>', methods=['GET', 'POST'])
-class Login(Resource):
-    def get(self, username, password):
-        user = User.query.filter_by(username=username).first()
-        if user is None or not user.check_password(password):
-            return jsonify({"message": "User/Passworda errata!", "code": 500})
-        else:
-            return jsonify({"message": "OK", "code": 200})
+from models import User, Food
 
 import base64
 
@@ -521,7 +513,7 @@ class Login(Resource):
             if usern is None:
                 token_start = username+":"+password
                 token = base64.b64encode(bytes(str(token_start).encode("utf-8")))
-                user = User(username=username, email=email, token=token, nome_bar=nomeLocale)
+                user = User(username=username, email=email, token=token.decode('utf-8'), nome_bar=nomeLocale)
 
                 user.set_password(password)
                 db.session.add(user)
@@ -532,31 +524,86 @@ class Login(Resource):
         else:
             return error_response(500, "You are not admin!")
 
-
+@api.route('/api/uniparthenope/foods/getToken/<username>/<pwd_admin>', methods=['GET'])
+class Login(Resource):
+    def get(self, username, pwd_admin):
+        if pwd_admin == "besteming":
+            usern = User.query.filter_by(username=username).first()
+            if usern is not None:
+                return jsonify({"code": 200, "token": usern.token})
+            else:
+                return error_response(500, "Error!")
+        else:
+            return error_response(500, "You are not admin!")
 ##TODO inserire token
 
+
 from flask import request
-@api.route('/api/uniparthenope/foods/addMenu/<token>/<data>', methods=['POST'])
+@api.route('/api/uniparthenope/foods/addMenu/<token>', methods=['POST'])
 class Login(Resource):
-    def post(self, token, data):
-        print('isJson= '+str(request.is_json))
+    def post(self, token):
         content = request.json
-        print(request.get_json())
         usern = User.query.filter_by(token=token).first()
+
         if usern is not None:
             nome_bar = usern.nome_bar
+            file = content['img']
+            starter = file.find(',')
+            image_data = file[starter + 1:]
+            image_data = bytes(image_data, encoding="ascii")
 
             print(nome_bar)
-            primo = content['primo']
-            secondo = content['secondo']
-            contorno = content['contorno']
-            altro = content['altro']
-            menu = Food(primo_piatto=primo, secondo_piatto=secondo, contorno=contorno, altro=altro, nome_food=nome_bar, orario_apertura=data)
+            nome = content['nome']
+            descrizione = content['descrizione']
+            tipologia = content['tipologia']
+            prezzo = content['prezzo']
+            active = content['attivo']
+            menu = Food(nome=nome,
+                        tipologia=tipologia,
+                        descrizione=descrizione,
+                        prezzo=prezzo,
+                        nome_food=nome_bar,
+                        sempre_attivo=active,
+                        image=image_data)
             db.session.add(menu)
             db.session.commit()
             return jsonify({"code": 200, "menu_code": menu.id})
         else:
             return error_response(500, "You are not admin!")
+
+
+from io import BytesIO
+from PIL import Image
+@api.route('/api/uniparthenope/foods/image', methods=['POST'])
+class Login(Resource):
+    def post(self):
+        content = request.json
+        file = content['img']
+        starter = file.find(',')
+        image_data = file[starter + 1:]
+        image_data = bytes(image_data, encoding="ascii")
+        im = Image.open(BytesIO(base64.b64decode(image_data)))
+        filename = 'test.jpg'
+        im.save("test.jpg")
+        return jsonify({'test':'ok'})
+
+
+
+@api.route('/api/uniparthenope/foods/removeMenu/<token>/<id>', methods=['GET'])
+class Login(Resource):
+    def get(self, token, id):
+        usern = User.query.filter_by(token=token).first()
+        if usern is not None:
+            menu = Food.query.filter_by(id=id).first()
+            if menu is not None and usern.nome_bar == menu.nome_food:
+
+                db.session.delete(menu)
+                db.session.commit()
+                return jsonify({"code": 200, "message": "Item id="+menu.id+" deleted!"})
+            else:
+                return error_response(500, "Object not found!")
+        else:
+            return error_response(500, "Not admin!")
 
 
 @api.route('/api/uniparthenope/foods/menuSearchData/<data>', methods=['GET'])
@@ -595,16 +642,50 @@ class Login(Resource):
                     and f.data.day == today.day\
                     and nome_bar == f.nome_food:
 
-                menu = ({'nome': f.nome_food,
-                         'primo': f.primo_piatto,
-                         'secondo': f.secondo_piatto,
-                         'contorno': f.contorno,
-                         'altro': f.altro,
-                         'apertura': f.orario_apertura})
+                menu = ({'nome': f.nome,
+                         'descrizione': f.descrizione,
+                         'prezzo': f.prezzo,
+                         'tipologia': f.tipologia,
+                         'sempre_attivo': f.sempre_attivo})
                 array.append(menu)
 
         return jsonify(array)
 
+@api.route('/api/uniparthenope/foods/getAllNames', methods=['GET'])
+class Login(Resource):
+    def get(self):
+        array = []
+
+        usern = User.query.all()
+        for f in usern:
+            array.append(f.nome_bar)
+        return jsonify(array)
+
+
+@api.route('/api/uniparthenope/foods/getAllToday', methods=['GET'])
+class Login(Resource):
+    def get(self):
+
+        array = []
+        today = datetime.today()
+
+        foods = Food.query.all()
+        for f in foods:
+            if (f.data.year == today.year \
+                    and f.data.month == today.month \
+                    and f.data.day == today.day)\
+                    or f.sempre_attivo:
+
+                menu = ({'nome': f.nome,
+                         'descrizione': f.descrizione,
+                         'prezzo': f.prezzo,
+                         'tipologia': f.tipologia,
+                         'sempre_attivo': f.sempre_attivo,
+                         'nome_bar': f.nome_food,
+                         'image': (f.image).decode('ascii')})
+                array.append(menu)
+
+        return jsonify(array)
 
 @api.route('/api/uniparthenope/foods/menuSearchUser/<nome_bar>', methods=['GET'])
 class Login(Resource):
@@ -618,12 +699,13 @@ class Login(Resource):
                 d = f.data.strftime('%Y-%m-%d %H:%M')
 
                 menu = ({'data': d,
-                        'nome': f.nome_food,
-                        'primo': f.primo_piatto,
-                        'secondo': f.secondo_piatto,
-                        'contorno': f.contorno,
-                        'altro': f.altro,
-                        'apertura': str(f.orario_apertura)
+                        'nome_bar': f.nome_food,
+                        'nome': f.nome,
+                        'descrizione': f.descrizione,
+                        'tipologia': f.tipologia,
+                        'prezzo': f.prezzo,
+                        'sempre_attivo': f.sempre_attivo,
+                         'id': f.id
                             })
                 array.append(menu)
 

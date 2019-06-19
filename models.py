@@ -23,13 +23,14 @@ class User(db.Model):
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    primo_piatto = db.Column(db.JSON)
-    secondo_piatto = db.Column(db.JSON)
-    contorno = db.Column(db.JSON)
-    altro = db.Column(db.JSON)
-    orario_apertura = db.Column(db.String(128))
+    nome = db.Column(db.String(120))
+    image = db.Column(db.BLOB)
+    tipologia = db.Column(db.String(120))
+    descrizione = db.Column(db.String(120))
+    prezzo = db.Column(db.Integer)
+    sempre_attivo = db.Column(db.Boolean)
     data = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     nome_food = db.Column(db.String(120), db.ForeignKey('user.nome_bar'))
 
     def __repr__(self):
-        return '<Primo piatto {}>'.format(self.primo_piatto) + '<Id {}>'.format(self.id)
+        return '<Primo piatto {}>'.format(self.nome) + '<Id {}>'.format(self.id)
