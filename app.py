@@ -572,22 +572,6 @@ class Login(Resource):
             return error_response(500, "You are not admin!")
 
 
-from io import BytesIO
-from PIL import Image
-@api.route('/api/uniparthenope/foods/image', methods=['POST'])
-class Login(Resource):
-    def post(self):
-        content = request.json
-        file = content['img']
-        starter = file.find(',')
-        image_data = file[starter + 1:]
-        image_data = bytes(image_data, encoding="ascii")
-        im = Image.open(BytesIO(base64.b64decode(image_data)))
-        filename = 'test.jpg'
-        im.save("test.jpg")
-        return jsonify({'test':'ok'})
-
-
 
 @api.route('/api/uniparthenope/foods/removeMenu/<token>/<id>', methods=['GET'])
 class Login(Resource):
