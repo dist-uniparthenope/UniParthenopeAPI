@@ -689,8 +689,9 @@ class Login(Resource):
                         'tipologia': f.tipologia,
                         'prezzo': f.prezzo,
                         'sempre_attivo': f.sempre_attivo,
-                         'id': f.id
-                            })
+                        'id': f.id,
+                        'image':(f.image).decode('ascii')
+                        })
                 array.append(menu)
 
         return jsonify(array)
