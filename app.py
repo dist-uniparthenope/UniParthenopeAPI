@@ -547,9 +547,9 @@ class Login(Resource):
 
         if usern is not None:
             nome_bar = usern.nome_bar
-            file = content['img']
-            starter = file.find(',')
-            image_data = file[starter + 1:]
+            image_data = content['img']
+            ##starter = file.find(',')
+            ##image_data = file
             image_data = bytes(image_data, encoding="ascii")
 
             print(nome_bar)
@@ -583,7 +583,7 @@ class Login(Resource):
 
                 db.session.delete(menu)
                 db.session.commit()
-                return jsonify({"code": 200, "message": "Item id="+menu.id+" deleted!"})
+                return jsonify({"code": 200, "message": "Item id="+str(menu.id)+" deleted!"})
             else:
                 return error_response(500, "Object not found!")
         else:
