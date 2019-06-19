@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="98ae8789-f4e0-4366-8fe2-9fb3802ea81d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="692" column="39" lean-forward="true" selection-start-line="692" selection-start-column="39" selection-end-line="692" selection-end-column="39" />
+            <state relative-caret-position="1936">
+              <caret line="691" column="35" lean-forward="true" selection-start-line="691" selection-start-column="35" selection-end-line="691" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -39,7 +40,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
+            <state relative-caret-position="408">
               <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -78,8 +79,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1933" />
-    <option name="y" value="90" />
+    <option name="x" value="311" />
+    <option name="y" value="99" />
     <option name="width" value="1400" />
     <option name="height" value="910" />
   </component>
@@ -128,7 +129,6 @@
   </component>
   <component name="RunManager">
     <configuration name="UniParthenopeAPI" type="Python.FlaskServer">
-      <option name="additionalOptions" value="-h 0.0.0.0" />
       <module name="UniParthenopeAPI" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
       <option name="targetType" value="PATH" />
@@ -177,14 +177,8 @@
       <workItem from="1560766986168" duration="44000" />
       <workItem from="1560767112711" duration="618000" />
       <workItem from="1560788435540" duration="17791000" />
-      <workItem from="1560936000236" duration="3130000" />
-    </task>
-    <task id="LOCAL-00001" summary="sh file">
-      <created>1558958764193</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1558958764193</updated>
+      <workItem from="1560936000236" duration="4407000" />
+      <workItem from="1560986517119" duration="1077000" />
     </task>
     <task id="LOCAL-00002" summary="test token">
       <created>1558963040773</created>
@@ -522,11 +516,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560938768509</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="new food">
+      <created>1560940210025</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1560940210026</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137131000" />
+    <option name="totallyTimeSpent" value="139485000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -538,15 +539,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1933" y="90" width="1400" height="910" extended-state="0" />
+    <frame x="311" y="99" width="1400" height="910" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18582089" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18880597" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32818532" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977612" weight="0.32818532" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977612" visible="true" weight="0.32818532" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -555,7 +556,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49925372" weight="0.32905483" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3298731" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50298506" side_tool="true" weight="0.32905483" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32818532" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32818532" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3298731" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -619,7 +620,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="new food" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560936814465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560987581482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="editorHistoryManager">
@@ -652,20 +653,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.jpg" />
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1936">
+          <caret line="691" column="35" lean-forward="true" selection-start-line="691" selection-start-column="35" selection-end-line="691" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
+        <state relative-caret-position="408">
           <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="692" column="39" lean-forward="true" selection-start-line="692" selection-start-column="39" selection-end-line="692" selection-end-column="39" />
         </state>
       </provider>
     </entry>

@@ -547,10 +547,11 @@ class Login(Resource):
 
         if usern is not None:
             nome_bar = usern.nome_bar
-            image_data = content['img']
-            ##starter = file.find(',')
-            ##image_data = file
-            image_data = bytes(image_data, encoding="ascii")
+            if content['img'] != "":
+                image_data = content['img']
+                image_data = bytes(image_data, encoding="ascii")
+            else:
+                image_data = None
 
             print(nome_bar)
             nome = content['nome']
@@ -659,14 +660,17 @@ class Login(Resource):
                     and f.data.month == today.month \
                     and f.data.day == today.day)\
                     or f.sempre_attivo:
-
+                if f.image is None:
+                    image = ""
+                else:
+                    image = (f.image).decode('ascii')
                 menu = ({'nome': f.nome,
                          'descrizione': f.descrizione,
                          'prezzo': f.prezzo,
                          'tipologia': f.tipologia,
                          'sempre_attivo': f.sempre_attivo,
                          'nome_bar': f.nome_food,
-                         'image': (f.image).decode('ascii')})
+                         'image': image})
                 array.append(menu)
 
         return jsonify(array)
@@ -681,7 +685,10 @@ class Login(Resource):
         for f in foods:
             if nome_bar == f.nome_food:
                 d = f.data.strftime('%Y-%m-%d %H:%M')
-
+                if f.image is None:
+                    image = ""
+                else:
+                    image = (f.image).decode('ascii')
                 menu = ({'data': d,
                         'nome_bar': f.nome_food,
                         'nome': f.nome,
@@ -690,7 +697,7 @@ class Login(Resource):
                         'prezzo': f.prezzo,
                         'sempre_attivo': f.sempre_attivo,
                         'id': f.id,
-                        'image':(f.image).decode('ascii')
+                        'image':image
                         })
                 array.append(menu)
 
