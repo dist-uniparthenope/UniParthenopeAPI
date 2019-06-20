@@ -40,7 +40,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
 
 
-@api.route('/api/uniparthenope/status',methods=['GET'])
+@api.route('/api/uniparthenope/status', methods=['GET'])
 class Login(Resource):
     def get(self):
         ga_sc = requests.request("GET", "http://ga.uniparthenope.it", timeout=30).status_code
@@ -69,6 +69,43 @@ class Login(Resource):
                         'ga': ga_sc,
                         'ga_color': ga_color,
                         })
+
+@api.route('/api/uniparthenope/admin/<token>/allUsers', methods=['GET'])
+class Login(Resource):
+    def get(self, token):
+
+        array = []
+        tok = User.query.filter_by(token=token).first()
+        if tok is not None and tok.username == "admin":
+            users = User.query.all()
+            for f in users:
+                user = ({'username': f.username,
+                     'email': f.username,
+                     'nome_bar': f.username,
+                     'id': f.id
+                     })
+                array.append(user)
+
+            return jsonify(array)
+        else:
+            return jsonify({'code': 404, 'message': "You are not admin!"})
+
+
+@api.route('/api/uniparthenope/admin/<token>/deleteUser/<id>', methods=['GET'])
+class Login(Resource):
+    def get(self, token, id):
+
+        tok = User.query.filter_by(token=token).first()
+        if tok is not None and tok.username == "admin":
+            user = User.query.filter_by(id=id).first()
+            if user is not None:
+                db.session.delete(user)
+                db.session.commit()
+                return jsonify({"code": 200, "message": "Item id=" + str(user.id) + " deleted!"})
+            else:
+                return jsonify({'code': 400, 'message': "User not found"})
+        else:
+            return jsonify({'code': 404, 'message': "You are not admin!"})
 
 
 @api.route('/api/uniparthenope/login/<token>',methods=['GET'])
