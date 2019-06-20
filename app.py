@@ -51,15 +51,15 @@ class Login(Resource):
         if response.status_code == 401:
             tok = User.query.filter_by(token=token).first()
             if tok is None:
-                if token == "YWRtaW46TWVsbG9uZTIwMTkh":
+                print('Auth Failed')
+                return jsonify({'statusCode': 401, 'errMsg': "Invalid Username or Password!"})
+            else:
+                if tok.username == "admin":
                     print('Auth Admin')
                     return jsonify({'statusCode': 666, 'username': "Admin"})
                 else:
-                    print('Auth Failed')
-                    return jsonify({'statusCode': 401, 'errMsg': "Invalid Username or Password!"})
-            else:
-                print('Auth Fornitore Servizi')
-                return jsonify({'statusCode': 600, 'username': tok.nome_bar})
+                    print('Auth Fornitore Servizi')
+                    return jsonify({'statusCode': 600, 'username': tok.nome_bar})
         else:
             print('Auth Stu/Doc')
             print(response.json())
