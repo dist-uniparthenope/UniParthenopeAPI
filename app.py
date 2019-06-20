@@ -91,6 +91,26 @@ class Login(Resource):
             return jsonify({'code': 404, 'message': "You are not admin!"})
 
 
+@api.route('/api/uniparthenope/admin/addUser/<username>/<password>/<email>/<nomeLocale>/<token>', methods=['POST'])
+class Login(Resource):
+    def post(self, username, password, email, nomeLocale, token):
+        tok = User.query.filter_by(token=token).first()
+        if tok is not None and tok.username == "admin":
+            usern = User.query.filter_by(username=username).first()
+            if usern is None:
+                token_start = username+":"+password
+                token = base64.b64encode(bytes(str(token_start).encode("utf-8")))
+                user = User(username=username, email=email, token=token.decode('utf-8'), nome_bar=nomeLocale)
+
+                user.set_password(password)
+                db.session.add(user)
+                db.session.commit()
+                return jsonify({"code": 200, "message": "OK"})
+            else:
+                return error_response(500, "User already exists!")
+        else:
+            return error_response(500, "You are not admin!")
+
 @api.route('/api/uniparthenope/admin/<token>/deleteUser/<id>', methods=['GET'])
 class Login(Resource):
     def get(self, token, id):
