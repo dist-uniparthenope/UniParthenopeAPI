@@ -30,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="62" column="13" lean-forward="true" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+            <state relative-caret-position="221">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
@@ -78,8 +78,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1964" />
-    <option name="y" value="35" />
+    <option name="x" value="2069" />
+    <option name="y" value="137" />
     <option name="width" value="1400" />
     <option name="height" value="910" />
   </component>
@@ -178,28 +178,9 @@
       <workItem from="1560788435540" duration="17791000" />
       <workItem from="1560936000236" duration="4407000" />
       <workItem from="1560986517119" duration="1698000" />
-      <workItem from="1561062110899" duration="426000" />
-    </task>
-    <task id="LOCAL-00003" summary="test token">
-      <created>1558963073981</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1558963073981</updated>
-    </task>
-    <task id="LOCAL-00004" summary="test token">
-      <created>1558963419262</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1558963419262</updated>
-    </task>
-    <task id="LOCAL-00005" summary="test token">
-      <created>1558963604960</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1558963604960</updated>
+      <workItem from="1561062110899" duration="2779000" />
+      <workItem from="1561065985701" duration="126000" />
+      <workItem from="1561066141962" duration="659000" />
     </task>
     <task id="LOCAL-00006" summary="test token">
       <created>1558973505448</created>
@@ -523,11 +504,32 @@
       <option name="project" value="LOCAL" />
       <updated>1560987614439</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="modalità admin">
+      <created>1561062652928</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1561062652929</updated>
+    </task>
+    <task id="LOCAL-00053" summary="modalità admin">
+      <created>1561062672506</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1561062672507</updated>
+    </task>
+    <task id="LOCAL-00054" summary="modalità admin">
+      <created>1561063139514</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1561063139514</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140532000" />
+    <option name="totallyTimeSpent" value="143670000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -539,15 +541,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1964" y="35" width="1400" height="910" extended-state="0" />
-    <editor active="true" />
+    <frame x="2069" y="137" width="1400" height="910" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19179104" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1977612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32818532" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977612" weight="0.32818532" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977612" visible="true" weight="0.32818532" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -555,7 +556,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49925372" weight="0.32905483" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3298731" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50298506" side_tool="true" weight="0.32905483" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50298506" side_tool="true" weight="0.32818532" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32818532" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3298731" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -617,10 +618,11 @@
     <MESSAGE value="altriCorsi" />
     <MESSAGE value="anm" />
     <MESSAGE value="new food" />
-    <option name="LAST_COMMIT_MESSAGE" value="new food" />
+    <MESSAGE value="modalità admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="modalità admin" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560987581482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1561066479532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="editorHistoryManager">
@@ -655,8 +657,8 @@
     <entry file="file://$PROJECT_DIR$/test.jpg" />
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="62" column="13" lean-forward="true" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+        <state relative-caret-position="221">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
         </state>
       </provider>
     </entry>

@@ -40,6 +40,37 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
 
 
+@api.route('/api/uniparthenope/status',methods=['GET'])
+class Login(Resource):
+    def get(self):
+        ga_sc = requests.request("GET", "http://ga.uniparthenope.it", timeout=30).status_code
+        esse3_sc = requests.request("GET", "https://uniparthenope.esse3.cineca.it", timeout=30).status_code
+        rss_sc = requests.request("GET", "https://www.uniparthenope.it/rss.xml", timeout=30).status_code
+
+        if ga_sc == 200:
+            ga_color = "green"
+        else:
+            ga_color = "red"
+
+        if esse3_sc == 200:
+            esse3_color = "green"
+        else:
+            esse3_color = "red"
+
+        if rss_sc == 200:
+            rss_color = "green"
+        else:
+            rss_color = "red"
+
+        return jsonify({'esse3': esse3_sc,
+                        'esse3_color':esse3_color,
+                        'rss': rss_sc,
+                        'rss_color': rss_color,
+                        'ga': ga_sc,
+                        'ga_color': ga_color,
+                        })
+
+
 @api.route('/api/uniparthenope/login/<token>',methods=['GET'])
 class Login(Resource):
     def get(self, token):
