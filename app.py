@@ -80,8 +80,8 @@ class Login(Resource):
             users = User.query.all()
             for f in users:
                 user = ({'username': f.username,
-                     'email': f.username,
-                     'nome_bar': f.username,
+                     'email': f.email,
+                     'nome_bar': f.nome_bar,
                      'id': f.id
                      })
                 array.append(user)
