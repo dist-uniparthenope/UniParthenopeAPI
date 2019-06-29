@@ -70,6 +70,7 @@ class Login(Resource):
                         'ga_color': ga_color,
                         })
 
+
 @api.route('/api/uniparthenope/admin/<token>/allUsers', methods=['GET'])
 class Login(Resource):
     def get(self, token):
@@ -298,6 +299,7 @@ class CurrentAA(Resource):
                             'data': "",
                             'lode': 0,
                             'voto': "OK",
+                            'anno': 0
                             })
         else:
             _response = response.json()
@@ -308,22 +310,25 @@ class CurrentAA(Resource):
                     'tipo': "",
                     'data': "",
                     'lode': 0,
-                    'voto': "OK"
+                    'voto': "OK",
+                    'anno': 0
                     })
             elif _response['statoDes'] == "Superata":
                 return jsonify({'stato': _response['statoDes'],
-                            'tipo': _response['tipoInsDes'],
-                            'data': _response['esito']['dataEsa'].split()[0],
-                            'lode': _response['esito']['lodeFlg'],
-                            'voto': _response['esito']['voto'],
-                            })
+                                'tipo': _response['tipoInsDes'],
+                                'data': _response['esito']['dataEsa'].split()[0],
+                                'lode': _response['esito']['lodeFlg'],
+                                'voto': _response['esito']['voto'],
+                                'anno': _response['annoCorso']
+                                })
             else:
                 return jsonify({'stato': _response['statoDes'],
-                            'tipo': _response['tipoInsDes'],
-                            'data': _response['esito']['dataEsa'],
-                            'lode': _response['esito']['lodeFlg'],
-                            'voto': _response['esito']['voto'],
-                            })
+                                'tipo': _response['tipoInsDes'],
+                                'data': _response['esito']['dataEsa'],
+                                'lode': _response['esito']['lodeFlg'],
+                                'voto': _response['esito']['voto'],
+                                'anno': _response['annoCorso']
+                                })
 
 
 @api.route('/api/uniparthenope/checkAppello/<token>/<cdsId>/<adId>', methods=['GET'])
@@ -920,8 +925,8 @@ from bs4 import BeautifulSoup
 @api.route('/api/uniparthenope/anm', methods=['GET'])
 class Login(Resource):
     def get(self):
-        url = "http://www.anm.it/infoclick/infoclick.php"
-        page = urllib.request.urlopen(url)
+        url_anm = "http://www.anm.it/infoclick/infoclick.php"
+        page = urllib.request.urlopen(url_anm)
         soup = BeautifulSoup(page, 'html.parser')
         key = soup.find('script').text
         print(key.split("'")[1])
