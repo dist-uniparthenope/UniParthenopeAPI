@@ -733,6 +733,7 @@ class Login(Resource):
 
         return jsonify(array)
 
+
 @api.route('/api/uniparthenope/foods/getAllNames', methods=['GET'])
 class Login(Resource):
     def get(self):
@@ -740,7 +741,8 @@ class Login(Resource):
 
         usern = User.query.all()
         for f in usern:
-            array.append(f.nome_bar)
+            if f.nome_bar != "ADMIN":
+                array.append(f.nome_bar)
         return jsonify(array)
 
 
