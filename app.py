@@ -540,10 +540,12 @@ class CurrentAA(Resource):
             if _response['attivita'][i]['sceltaFlg'] == 1:
                 adId = str(_response['attivita'][i]['chiaveADContestualizzata']['adId'])
                 adSceId = _response['attivita'][i]['adsceAttId']
+                print("Ads ID: " + str(adSceId))
                 response_2 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId), headers=headers)
+                print(response_2)
 
-                if response_2.status_code == 500:
-                    print('ERRORE 500')
+                if response_2.status_code == 500 or response_2.status_code == 404:
+                    print('ERRORE')
                 else:
                     _response2 = response_2.json()
 
