@@ -197,6 +197,7 @@ class TotalExams(Resource):
                             'centodieci': media_centodieci})
 
 
+##TODO Da aggiustare!!!!!
 @api.route('/api/uniparthenope/current_aa/<token>/<cdsId>', methods=['GET'])
 class CurrentAA(Resource):
     def get(self, token, cdsId):
@@ -204,16 +205,12 @@ class CurrentAA(Resource):
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
+        print(cdsId)
         response = requests.request("GET", url + "calesa-service-v1/sessioni?cdsId=" + cdsId, headers=headers)
         _response = response.json()
 
         date = datetime.today()
         curr_day = datetime(date.year, date.month, date.day)
-
-        if curr_day.day <= 15 and curr_day.month >= 9:
-            academic_year = str(curr_day.year) + " - " + str(curr_day.year+1)
-        else:
-            academic_year = str(curr_day.year - 1) + " - " + str(curr_day.year)
 
         max_year = 0
         for i in range(0, len(_response)):
@@ -224,22 +221,28 @@ class CurrentAA(Resource):
             if _response[i]['aaSesId'] == max_year:
                 startDate = extractData(_response[i]['dataInizio'])
                 endDate = extractData(_response[i]['dataFine'])
-                
-                print("Inizio: " + str(startDate))
-                print("Fine: " + str(endDate))
-                print("Oggi: " + str(curr_day))
 
                 if (curr_day >= startDate and curr_day <= endDate):
+                    print("Inizio: " + str(startDate))
+                    print("Fine: " + str(endDate))
+                    print("Oggi: " + str(curr_day))
+
                     curr_sem = _response[i]['des']
-                    if (curr_sem == "Sessione Anticipata" or curr_sem == "Sessione Estiva"):
-                        return jsonify({'curr_sem': _response[i]['des'],
-                                        'semestre': "Secondo Semestre",
-                                        'aa_accad': academic_year
-                                        })
+
+                    academic_year = str(_response[i]['aaSesId']) + " - " + str(_response[i]['aaSesId']+1)
+
+                    if curr_sem == "Sessione Estiva":
+                        return jsonify({
+                            'curr_sem': _response[i]['des'],
+                            'semestre': "Secondo Semestre",
+                            'aa_accad': academic_year
+                        })
                     else:
-                        return jsonify({'curr_sem': _response[i]['des'],
-                                        'semestre': "Primo Semestre",
-                                        'aa_accad': academic_year})
+                        return jsonify({
+                            'curr_sem': _response[i]['des'],
+                            'semestre': "Primo Semestre",
+                            'aa_accad': academic_year
+                        })
 
 
 @api.route('/api/uniparthenope/pianoId/<token>/<stuId>', methods=['GET'])
@@ -671,8 +674,6 @@ class Login(Resource):
         else:
             return error_response(500, "You are not admin!")
 
-
-
 @api.route('/api/uniparthenope/foods/removeMenu/<token>/<id>', methods=['GET'])
 class Login(Resource):
     def get(self, token, id):
@@ -688,7 +689,6 @@ class Login(Resource):
                 return error_response(500, "Object not found!")
         else:
             return error_response(500, "Not admin!")
-
 
 @api.route('/api/uniparthenope/foods/menuSearchData/<data>', methods=['GET'])
 class Login(Resource):
@@ -829,6 +829,9 @@ class Login(Resource):
                 '&to_year=' + str(end_date.year) + \
                 '&areamatch=Centro+Direzionale&roommatch=&typematch%5B%5D=' + nome_studio + \
                 '&namematch=&descrmatch=&creatormatch=&match_private=0&match_confirmed=1&match_referente=&match_unita_interne=&match_ore_unita_interne=&match_unita_vigilanza=&match_ore_unita_vigilanza=&match_unita_pulizie=&match_ore_unita_pulizie=&match_audio_video=&match_catering=&match_Acconto=&match_Saldo=&match_Fattura=&output=0&output_format=1&sortby=s&sumby=d&phase=2&datatable=1'
+
+        print(url_n)
+
         url_open = urllib.request.urlopen(url_n)
         csvfile = csv.reader(io.StringIO(url_open.read().decode('utf-16')), delimiter=',') 
 
