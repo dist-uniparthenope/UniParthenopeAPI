@@ -566,6 +566,35 @@ class CurrentAA(Resource):
 
                             if len(_response3)==0:
                                 print("Response3 non idoneo")
+                                response_4 = requests.request("GET",
+                                                              url + "logistica-service-v1/logistica?adId=" + adId,
+                                                              headers=headers)
+                                _response4 = response_4.json()
+
+                                max_year = 0
+                                print('PROSEGUO')
+                                if response_4.status_code == 200:
+                                    for x in range(0, len(_response4)):
+                                        if _response4[x]['chiaveADFisica']['aaOffId'] > max_year:
+                                            max_year = _response4[x]['chiaveADFisica']['aaOffId']
+
+                                    for x in range(0, len(_response4)):
+                                        if _response4[x]['chiaveADFisica']['aaOffId'] == max_year:
+                                            actual_exam = ({
+                                                'nome': _response['attivita'][i]['adLibDes'],
+                                                'codice': _response['attivita'][i]['adLibCod'],
+                                                'adId': _response['attivita'][i]['chiaveADContestualizzata']['adId'],
+                                                'CFU': _response['attivita'][i]['peso'],
+                                                'annoId': _response['attivita'][i]['scePianoId'],
+                                                'docente': "N/A",
+                                                'docenteID': "N/A",
+                                                'semestre': "N/A",
+                                                'adLogId': _response4[x]['chiavePartizione']['adLogId'],
+                                                'inizio': _response4[x]['dataInizio'].split()[0],
+                                                'fine': _response4[x]['dataFine'].split()[0],
+                                                'ultMod': _response4[x]['dataModLog'].split()[0]
+                                            })
+                                            my_exams.append(actual_exam)
 
                             else:
 
