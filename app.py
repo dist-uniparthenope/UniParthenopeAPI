@@ -198,16 +198,16 @@ class TotalExams(Resource):
 
 
 ##TODO Da aggiustare!!!!!
-@api.route('/api/uniparthenope/current_aa/<token>/<cdsId>/<auth>', methods=['GET'])
+@api.route('/api/uniparthenope/current_aa/<cdsId>', methods=['GET'])
 class CurrentAA(Resource):
-    def get(self, token, cdsId, auth):
+    def get(self, cdsId):
         headers = {
             'Content-Type': "application/json",
-            "Authorization": "Basic " + token
         }
         print(cdsId)
-        response = requests.request("GET", url + "calesa-service-v1/sessioni?cdsId=" + cdsId + "/;jsessionid="+ auth, headers=headers)
+        response = requests.request("GET", url + "calesa-service-v1/sessioni?cdsId=" + cdsId, headers=headers)
         _response = response.json()
+        print(response)
 
         date = datetime.today()
         curr_day = datetime(date.year, date.month, date.day)

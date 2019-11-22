@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98ae8789-f4e0-4366-8fe2-9fb3802ea81d" name="Default Changelist" comment="bug fixed">
+    <list default="true" id="98ae8789-f4e0-4366-8fe2-9fb3802ea81d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
@@ -123,14 +123,10 @@
       <workItem from="1571943206516" duration="4048000" />
       <workItem from="1571995154659" duration="398000" />
       <workItem from="1572195044453" duration="903000" />
-      <workItem from="1573222612706" duration="2027000" />
-    </task>
-    <task id="LOCAL-00013" summary="medie">
-      <created>1558990267232</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1558990267232</updated>
+      <workItem from="1573222612706" duration="2622000" />
+      <workItem from="1574357725798" duration="974000" />
+      <workItem from="1574359343967" duration="2413000" />
+      <workItem from="1574429143401" duration="337000" />
     </task>
     <task id="LOCAL-00014" summary="medie">
       <created>1558991007581</created>
@@ -468,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573223056418</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="bug fixed">
+      <created>1573224975200</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1573224975201</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TodoView">
@@ -530,6 +533,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1573224818727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1574429488030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
