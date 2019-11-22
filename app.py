@@ -551,7 +551,7 @@ class CurrentAA(Resource):
 
 
                 print("Ads ID: " + str(adSceId))
-                response_2 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId), headers=headers)
+                response_2 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId) + "/;jsessionid=" + auth, headers=headers)
                 print(response_2)
 
                 if response_2.status_code == 500 or response_2.status_code == 404:
@@ -563,8 +563,7 @@ class CurrentAA(Resource):
                         print("ADID="+ adId)
                         print("ADSCEID="+str(adSceId))
 
-                        response_3 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(
-                                                      adSceId)+"/partizioni", headers=headers)
+                        response_3 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId)+ "/partizioni" + "/;jsessionid=" + auth, headers=headers)
                         
                         if response_3.status_code == 500 or response_3.status_code == 404:
                             print('Response 3 non idoneo!skip')
@@ -573,9 +572,7 @@ class CurrentAA(Resource):
 
                             if len(_response3)==0:
                                 print("Response3 non idoneo")
-                                response_4 = requests.request("GET",
-                                                              url + "logistica-service-v1/logistica?adId=" + adId,
-                                                              headers=headers)
+                                response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId + "/;jsessionid=" + auth, headers=headers)
                                 _response4 = response_4.json()
 
                                 max_year = 0
@@ -605,8 +602,7 @@ class CurrentAA(Resource):
 
                             else:
 
-                                response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId,
-                                                    headers=headers)
+                                response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId + "/;jsessionid=" + auth, headers=headers)
                                 _response4 = response_4.json()
 
                                 max_year = 0
