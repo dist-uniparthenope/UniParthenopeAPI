@@ -198,15 +198,15 @@ class TotalExams(Resource):
 
 
 ##TODO Da aggiustare!!!!!
-@api.route('/api/uniparthenope/current_aa/<token>/<cdsId>', methods=['GET'])
+@api.route('/api/uniparthenope/current_aa/<token>/<cdsId>/<auth>', methods=['GET'])
 class CurrentAA(Resource):
-    def get(self, token, cdsId):
+    def get(self, token, cdsId, auth):
         headers = {
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
         print(cdsId)
-        response = requests.request("GET", url + "calesa-service-v1/sessioni?cdsId=" + cdsId, headers=headers)
+        response = requests.request("GET", url + "calesa-service-v1/sessioni?cdsId=" + cdsId + "/;jsessionid="+ auth, headers=headers)
         _response = response.json()
 
         date = datetime.today()
@@ -245,28 +245,28 @@ class CurrentAA(Resource):
                         })
 
 
-@api.route('/api/uniparthenope/pianoId/<token>/<stuId>', methods=['GET'])
+@api.route('/api/uniparthenope/pianoId/<token>/<stuId>/<auth>', methods=['GET'])
 class CurrentAA(Resource):
-    def get(self, token, stuId):
+    def get(self, token, stuId, auth):
         headers = {
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
-        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId, headers=headers)
+        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/;jsessionid=" + auth, headers=headers)
         _response = response.json()
         pianoId = _response[0]['pianoId']
 
         return jsonify({'pianoId': pianoId})
 
 
-@api.route('/api/uniparthenope/exams/<token>/<stuId>/<pianoId>', methods=['GET'])
+@api.route('/api/uniparthenope/exams/<token>/<stuId>/<pianoId>/<auth>', methods=['GET'])
 class CurrentAA(Resource):
-    def get(self, token, stuId, pianoId):
+    def get(self, token, stuId, pianoId, auth):
         headers = {
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
-        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/" + pianoId, headers=headers)
+        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/" + pianoId + "/;jsessionid="+auth, headers=headers)
         _response = response.json()
         my_exams = []
 
@@ -287,14 +287,14 @@ class CurrentAA(Resource):
         return jsonify(my_exams)
 
 
-@api.route('/api/uniparthenope/checkExam/<token>/<matId>/<examId>', methods=['GET'])
+@api.route('/api/uniparthenope/checkExam/<token>/<matId>/<examId>/<auth>', methods=['GET'])
 class CurrentAA(Resource):
-    def get(self, token, matId, examId):
+    def get(self, token, matId, examId, auth):
         headers = {
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
-        response = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + examId, headers=headers)
+        response = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + examId +"/;jsessionid="+ auth, headers=headers)
 
         if response.status_code == 500:
             return jsonify({'stato': "Indefinito",
@@ -304,6 +304,10 @@ class CurrentAA(Resource):
                             'voto': "OK",
                             'anno': 0
                             })
+        elif response.status_code == 403:
+            _response = response.json()
+            return _response
+
         else:
             _response = response.json()
 
@@ -529,20 +533,23 @@ class CurrentAA(Resource):
                         'orario_studenti': oc_studenti})
 
 
-@api.route('/api/uniparthenope/examsToFreq/<token>/<stuId>/<pianoId>/<matId>', methods=['GET'])
+@api.route('/api/uniparthenope/examsToFreq/<token>/<stuId>/<pianoId>/<matId>/<auth>', methods=['GET'])
 class CurrentAA(Resource):
-     def get(self, token, stuId, pianoId, matId):
+     def get(self, token, stuId, pianoId, matId, auth):
         headers = {
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
-        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/" + pianoId, headers=headers)
+        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/" + pianoId + "/;jsessionid=" + auth, headers=headers)
         _response = response.json()
         my_exams = []
         for i in range(0, len(_response['attivita'])):
             if _response['attivita'][i]['sceltaFlg'] == 1:
                 adId = str(_response['attivita'][i]['chiaveADContestualizzata']['adId'])
                 adSceId = _response['attivita'][i]['adsceAttId']
+
+
+
                 print("Ads ID: " + str(adSceId))
                 response_2 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId), headers=headers)
                 print(response_2)
