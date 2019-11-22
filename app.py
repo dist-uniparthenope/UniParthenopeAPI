@@ -602,7 +602,7 @@ class CurrentAA(Resource):
 
                             else:
 
-                                response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId + "/;jsessionid=" + auth, headers=headers)
+                                response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId, headers=headers)
                                 _response4 = response_4.json()
 
                                 max_year = 0
