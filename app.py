@@ -184,10 +184,10 @@ class TotalExams(Resource):
         _response = response.json()
         for i in range(0,len(_response)):
             if _response[i]['tipoMediaCod']['value'] is value:
-                if _response[i]['base'] is 30:
+                if _response[i]['base'] == 30:
                     base_trenta = 30
                     media_trenta = _response[i]['media']
-                if _response[i]['base'] is 110:
+                if _response[i]['base'] == 110:
                     base_centodieci = 110
                     media_centodieci = _response[i]['media']
 
@@ -966,6 +966,7 @@ def extractData(data):
 ANM
 '''
 from bs4 import BeautifulSoup
+from bus import glob
 @api.route('/api/uniparthenope/anm/orari/<sede>', methods=['GET'])
 class Login(Resource):
     def get(self,sede):
@@ -975,68 +976,71 @@ class Login(Resource):
         key = soup.find('script').text
         key_final = key.split("'")[1]
         print(key_final)
-
-        glob = [
-            {
-                "nome" : "CDN",
-                "info":
-                    [
-                        {
-                            "nome" : "Via Acton",
-                            "linea": [
-                                {
-                                    "bus" : "R5",
-                                    "palina" : "1932",
-                                    "palina_arrivo" : "4097"
-                                },
-                                {
-                                    "bus" : "154",
-                                    "palina" : "4097",
-                                    "palina_arrivo" : "1462"
-                                }
-                           ]
-                        },
-                        {
-                            "nome": "Via Medina",
-                            "linea": [
-                                {
-                                    "nome_part": "Taddeo Da Sessa",
-                                    "nome_arr": "Volta-Brin",
-                                    "bus": "R5",
-                                    "palina": "1932",
-                                    "lat_partenza": "40.838780",
-                                    "long_partneza": "14.251921",
-                                    "lat_arrivo": "",
-                                    "long_arrivo": ""
-                                },
-                                {
-                                    "nome": "Taddeo Da Sessa",
-                                    "bus": "154",
-                                    "palina": "4097",
-                                    "lat_partenza": "40.838780",
-                                    "long_partneza": "14.251921",
-                                    "lat_arrivo": "",
-                                    "long_arrivo": ""
-                                }
-                            ]
-                        }
-                    ]
-            }
-        ]
+        array = []
 
         for i in range(0, len(glob)):
             if glob[i]['nome'] == sede:
                 for j in range(0, len(glob[i]["info"])):
+                    array2 = []
                     for k in range(0, len(glob[i]["info"][j])):
-                        print(glob[i]["info"][j]["linea"][k]["palina"])
+                        print("PALINA = "+glob[i]["info"][j]["linea"][k]["palina"])
                         data = {
                             'Palina': glob[i]["info"][j]["linea"][k]["palina"],
                             'key': key_final
                         }
 
                         r = requests.post("http://srv.anm.it/ServiceInfoAnmLinee.asmx/CaricaPrevisioni", json=data)
-                        respone = r.json()
-                        print(respone)
+                        response = r.json()
+                        print(response)
+
+                        array_orari = []
+                        for x in range(0,len(response["d"])):
+                            print(response["d"][x]["id"])
+                            if response["d"][x]["id"] is not None:
+                                item = ({
+                                    'time': response["d"][x]["time"],
+                                    'tempoRim': response["d"][x]["timeMin"]
+                                })
+                                array_orari.append(item)
+
+                        data_info = {
+                            'linea': glob[i]["info"][j]["linea"][k]["bus"],
+                            'key': key_final
+                        }
+
+                        r_info = requests.post("http://srv.anm.it/ServiceInfoAnmLinee.asmx/CaricaPercorsoLinea", json=data_info)
+                        response_info = r_info.json()
+                        print(response)
+                        partenza = {}
+                        arrivo = {}
+                        for f in range(len(response_info["d"])):
+                            if response_info["d"][f]["id"] == glob[i]["info"][j]["linea"][k]["palina"]:
+                                partenza = ({
+                                         'id': glob[i]["info"][j]["linea"][k]["palina"],
+                                         'nome': response_info["d"][f]["nome"],
+                                         'lat': response_info["d"][f]["lat"],
+                                         'long': response_info["d"][f]["lon"],
+                                         'orari': array_orari
+                                        })
+                            if response_info["d"][f]["id"] == glob[i]["info"][j]["linea"][k]["palina_arrivo"]:
+                                arrivo = ({
+                                         'id': glob[i]["info"][j]["linea"][k]["palina_arrivo"],
+                                         'nome': response_info["d"][f]["nome"],
+                                         'lat': response_info["d"][f]["lat"],
+                                         'long': response_info["d"][f]["lon"]
+                                        })
+                        item = ({'linea': glob[i]["info"][j]["linea"][k]["bus"],
+                                 'partenza': partenza,
+                                 'arrivo': arrivo})
+                        array2.append(item)
+
+                    item = ({'name': glob[i]["info"][j]["nome"],
+                             'linea': array2})
+                    array.append(item)
+                return array
+
+            else:
+                return "Errore!"
 
         '''
         if sede == "CDN":
