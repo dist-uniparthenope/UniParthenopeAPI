@@ -266,7 +266,10 @@ class CurrentAA(Resource):
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
-        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/" + pianoId + "/;jsessionid="+auth, headers=headers)
+        response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/" + pianoId, headers=headers)
+        print(response.json())
+        print(response.status_code)
+
         _response = response.json()
         my_exams = []
 
@@ -286,7 +289,6 @@ class CurrentAA(Resource):
 
         return jsonify(my_exams)
 
-
 @api.route('/api/uniparthenope/checkExam/<token>/<matId>/<examId>/<auth>', methods=['GET'])
 class CurrentAA(Resource):
     def get(self, token, matId, examId, auth):
@@ -294,7 +296,7 @@ class CurrentAA(Resource):
             'Content-Type': "application/json",
             "Authorization": "Basic " + token
         }
-        response = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + examId +"/;jsessionid="+ auth, headers=headers)
+        response = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + examId + "/;jsessionid=" + auth, headers=headers)
 
         if response.status_code == 500:
             return jsonify({'stato': "Indefinito",
@@ -542,29 +544,32 @@ class CurrentAA(Resource):
         }
         response = requests.request("GET", url + "piani-service-v1/piani/" + stuId + "/" + pianoId + "/;jsessionid=" + auth, headers=headers)
         _response = response.json()
+
+        print("JSON (examsToFreq --> 1): " + str(_response))
+        print("JSON (Lunghezza --> 1)" + str(len(_response['attivita'])))
+
         my_exams = []
         for i in range(0, len(_response['attivita'])):
             if _response['attivita'][i]['sceltaFlg'] == 1:
                 adId = str(_response['attivita'][i]['chiaveADContestualizzata']['adId'])
                 adSceId = _response['attivita'][i]['adsceAttId']
 
-
-
                 print("Ads ID: " + str(adSceId))
                 response_2 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId) + "/;jsessionid=" + auth, headers=headers)
-                print(response_2)
+                print("JSON (examsToFreq --> 2): " + str(response_2.json()))
 
                 if response_2.status_code == 500 or response_2.status_code == 404:
-                    print('ERRORE')
+                    print('ERRORE --> 2')
                 else:
                     _response2 = response_2.json()
 
                     if _response2['statoDes'] != "Superata" and len(_response2) != 0:
-                        print("ADID="+ adId)
-                        print("ADSCEID="+str(adSceId))
+                        print("ADID --> 2=" + adId)
+                        print("ADSCEID --> 2 = " + str(adSceId))
 
                         response_3 = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/righe/" + str(adSceId)+ "/partizioni" + "/;jsessionid=" + auth, headers=headers)
-                        
+                        print("JSON (examsToFreq --> 3): " + str(response_3.json()))
+
                         if response_3.status_code == 500 or response_3.status_code == 404:
                             print('Response 3 non idoneo!skip')
                         else:
@@ -574,9 +579,9 @@ class CurrentAA(Resource):
                                 print("Response3 non idoneo")
                                 response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId, headers=headers)
                                 _response4 = response_4.json()
+                                print("JSON (examsToFreq --> 4 (IF)): " + str(response_4.json()))
 
                                 max_year = 0
-                                print('PROSEGUO')
                                 if response_4.status_code == 200:
                                     for x in range(0, len(_response4)):
                                         if _response4[x]['chiaveADFisica']['aaOffId'] > max_year:
@@ -604,9 +609,9 @@ class CurrentAA(Resource):
 
                                 response_4 = requests.request("GET", url + "logistica-service-v1/logistica?adId=" + adId, headers=headers)
                                 _response4 = response_4.json()
+                                print("JSON (examsToFreq --> 4) (ELSE): " + str(response_4.json()))
 
                                 max_year = 0
-                                print('PROSEGUO')
                                 if response_4.status_code == 200:
                                     for x in range(0, len(_response4)):
                                         if _response4[x]['chiaveADFisica']['aaOffId'] > max_year:
@@ -961,14 +966,76 @@ def extractData(data):
 ANM
 '''
 from bs4 import BeautifulSoup
-@api.route('/api/uniparthenope/anm', methods=['GET'])
+@api.route('/api/uniparthenope/anm/orari/<sede>', methods=['GET'])
 class Login(Resource):
-    def get(self):
+    def get(self,sede):
         url_anm = "http://www.anm.it/infoclick/infoclick.php"
         page = urllib.request.urlopen(url_anm)
         soup = BeautifulSoup(page, 'html.parser')
         key = soup.find('script').text
-        print(key.split("'")[1])
+        key_final = key.split("'")[1]
+        print(key_final)
+
+        glob = [
+            {
+                "nome" : "CDN",
+                "info":
+                    [
+                        {
+                            "nome" : "Via Acton",
+                            "linea": [
+                                {
+                                    "nome_part" : "Taddeo Da Sessa",
+                                    "nome_arr" : "Volta-Brin",
+                                    "bus" : "R5",
+                                    "palina" : "1932",
+                                    "lat_partenza" : "40.838780",
+                                    "long_partneza" : "14.251921",
+                                    "lat_arrivo": "",
+                                    "long_arrivo": ""
+                                },
+                                {
+                                    "nome" : "Taddeo Da Sessa",
+                                    "bus" : "154",
+                                    "palina" : "4097",
+                                    "lat_partenza" : "40.838780",
+                                    "long_partneza" : "14.251921",
+                                    "lat_arrivo": "",
+                                    "long_arrivo": ""
+                                }
+                           ]
+                        }
+                    ]
+            }
+        ]
+
+        for i in range(0, len(glob)):
+            if glob[i]['nome'] == sede:
+                for j in range(0, len(glob[i]["info"])):
+                    for k in range(0, len(glob[i]["info"][j])):
+                        print(glob[i]["info"][j]["linea"][k]["palina"])
+                        data = {
+                            'Palina': glob[i]["info"][j]["linea"][k]["palina"],
+                            'key': key_final
+                        }
+
+                        r = requests.post("http://srv.anm.it/ServiceInfoAnmLinee.asmx/CaricaPrevisioni", json=data)
+                        respone = r.json()
+                        print(respone)
+
+        '''
+        if sede == "CDN":
+            for i in range(0, len(paline_CDN_ACTON)):
+                print("Palina:" + paline_CDN_ACTON[i])
+                data = {
+                    'Palina': paline_CDN_ACTON[i],
+                    'key': key_final
+                }
+
+                r = requests.post("http://srv.anm.it/ServiceInfoAnmLinee.asmx/CaricaPrevisioni", json=data)
+                respone = r.json()
+        '''
+
 
 
 
