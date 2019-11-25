@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98ae8789-f4e0-4366-8fe2-9fb3802ea81d" name="Default Changelist" comment="bug fixed">
+    <list default="true" id="98ae8789-f4e0-4366-8fe2-9fb3802ea81d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
@@ -127,14 +127,7 @@
       <workItem from="1574357725798" duration="974000" />
       <workItem from="1574359343967" duration="2413000" />
       <workItem from="1574429143401" duration="5815000" />
-      <workItem from="1574680113597" duration="7783000" />
-    </task>
-    <task id="LOCAL-00018" summary="session">
-      <created>1559038538620</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1559038538620</updated>
+      <workItem from="1574680113597" duration="8550000" />
     </task>
     <task id="LOCAL-00019" summary="esami e libretto">
       <created>1559043154986</created>
@@ -472,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574430705065</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="anm">
+      <created>1574707198755</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1574707198755</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TodoView">
@@ -523,14 +523,14 @@
     <MESSAGE value="segreteria orari" />
     <MESSAGE value="orari" />
     <MESSAGE value="altriCorsi" />
-    <MESSAGE value="anm" />
     <MESSAGE value="new food" />
     <MESSAGE value="modalità admin" />
     <MESSAGE value="status api" />
     <MESSAGE value="admin apis" />
     <MESSAGE value="update exams" />
     <MESSAGE value="bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixed" />
+    <MESSAGE value="anm" />
+    <option name="LAST_COMMIT_MESSAGE" value="anm" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

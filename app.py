@@ -985,25 +985,40 @@ class Login(Resource):
                             "nome" : "Via Acton",
                             "linea": [
                                 {
-                                    "nome_part" : "Taddeo Da Sessa",
-                                    "nome_arr" : "Volta-Brin",
                                     "bus" : "R5",
                                     "palina" : "1932",
-                                    "lat_partenza" : "40.838780",
-                                    "long_partneza" : "14.251921",
+                                    "palina_arrivo" : "4097"
+                                },
+                                {
+                                    "bus" : "154",
+                                    "palina" : "4097",
+                                    "palina_arrivo" : "1462"
+                                }
+                           ]
+                        },
+                        {
+                            "nome": "Via Medina",
+                            "linea": [
+                                {
+                                    "nome_part": "Taddeo Da Sessa",
+                                    "nome_arr": "Volta-Brin",
+                                    "bus": "R5",
+                                    "palina": "1932",
+                                    "lat_partenza": "40.838780",
+                                    "long_partneza": "14.251921",
                                     "lat_arrivo": "",
                                     "long_arrivo": ""
                                 },
                                 {
-                                    "nome" : "Taddeo Da Sessa",
-                                    "bus" : "154",
-                                    "palina" : "4097",
-                                    "lat_partenza" : "40.838780",
-                                    "long_partneza" : "14.251921",
+                                    "nome": "Taddeo Da Sessa",
+                                    "bus": "154",
+                                    "palina": "4097",
+                                    "lat_partenza": "40.838780",
+                                    "long_partneza": "14.251921",
                                     "lat_arrivo": "",
                                     "long_arrivo": ""
                                 }
-                           ]
+                            ]
                         }
                     ]
             }
