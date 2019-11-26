@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98ae8789-f4e0-4366-8fe2-9fb3802ea81d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bus.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/UniParthenopeAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UniParthenopeAPI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
@@ -138,14 +134,9 @@
       <workItem from="1574680113597" duration="8550000" />
       <workItem from="1574709367935" duration="64000" />
       <workItem from="1574709451558" duration="351000" />
-      <workItem from="1574709873964" duration="10498000" />
-    </task>
-    <task id="LOCAL-00019" summary="esami e libretto">
-      <created>1559043154986</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1559043154986</updated>
+      <workItem from="1574709873964" duration="11070000" />
+      <workItem from="1574760681938" duration="370000" />
+      <workItem from="1574770452179" duration="1136000" />
     </task>
     <task id="LOCAL-00020" summary="data update">
       <created>1559057951392</created>
@@ -483,7 +474,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574707198755</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Update libraries&#10;Anm API orari quasi terminata&#10;bus.py creato">
+      <created>1574725083347</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1574725083347</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TodoView">
@@ -516,7 +514,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="test token" />
     <MESSAGE value="Login ok" />
     <MESSAGE value="libretto api" />
     <MESSAGE value="medie" />
@@ -541,10 +538,11 @@
     <MESSAGE value="update exams" />
     <MESSAGE value="bug fixed" />
     <MESSAGE value="anm" />
-    <option name="LAST_COMMIT_MESSAGE" value="anm" />
+    <MESSAGE value="Update libraries&#10;Anm API orari quasi terminata&#10;bus.py creato" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update libraries&#10;Anm API orari quasi terminata&#10;bus.py creato" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1574724653331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1574771698774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

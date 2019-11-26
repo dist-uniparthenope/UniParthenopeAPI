@@ -1040,23 +1040,55 @@ class Login(Resource):
                 return array
 
             else:
-                return "Errore!"
-
-        '''
-        if sede == "CDN":
-            for i in range(0, len(paline_CDN_ACTON)):
-                print("Palina:" + paline_CDN_ACTON[i])
-                data = {
-                    'Palina': paline_CDN_ACTON[i],
-                    'key': key_final
-                }
-
-                r = requests.post("http://srv.anm.it/ServiceInfoAnmLinee.asmx/CaricaPrevisioni", json=data)
-                respone = r.json()
-        '''
+                return error_response(500, "Impossibile recuperare informazioni Orari Bus")
 
 
+@api.route('/api/uniparthenope/anm/bus/<sede>', methods=['GET'])
+class Login(Resource):
+    def get(self,sede):
+        url_anm = "http://www.anm.it/infoclick/infoclick.php"
+        page = urllib.request.urlopen(url_anm)
+        soup = BeautifulSoup(page, 'html.parser')
+        key = soup.find('script').text
+        key_final = key.split("'")[1]
+        print(key_final)
+        array = []
 
+        for i in range(0, len(glob)):
+            if glob[i]['nome'] == sede:
+                for j in range(0, len(glob[i]["info"])):
+                    array2 = []
+                    for k in range(0, len(glob[i]["info"][j])):
+                        print("PALINA = "+glob[i]["info"][j]["linea"][k]["palina"])
+                        data = {
+                            'linea': glob[i]["info"][j]["linea"][k]["bus"],
+                            'key': key_final
+                        }
+
+                        r = requests.post("http://srv.anm.it/ServiceInfoAnmLinee.asmx/CaricaPosizioneVeicolo", json=data)
+                        response = r.json()
+
+                        if response["d"][0]["stato"] is None:
+                            pos_bus = []
+                            for x in range(0,len(response["d"])):
+                                print(response["d"][x]["linea"])
+                                item = ({
+                                    'lat': response["d"][x]["lat"],
+                                    'long': response["d"][x]["lon"]
+                                })
+                                pos_bus.append(item)
+
+                            item = ({'linea': glob[i]["info"][j]["linea"][k]["bus"],
+                                 'bus': pos_bus})
+                            array2.append(item)
+
+                    item = ({'name': glob[i]["info"][j]["nome"],
+                             'linea': array2})
+                    array.append(item)
+                return array
+
+            else:
+                return error_response(500, "Impossibile recuperare informazioni Bus")
 
 
 from werkzeug.http import HTTP_STATUS_CODES
