@@ -154,6 +154,19 @@ class Login(Resource):
             print(response.json())
             return jsonify({'response': response.json()})
 
+@api.route('/api/uniparthenope/logout/<token>/<auth>',methods=['GET'])
+class Logout(Resource):
+    def get(self, token, auth):
+        headers = {
+            'Content-Type': "application/json",
+            "Authorization": "Basic " + token
+        }
+        response = requests.request("GET", url + "logout/;jsessionid=" + auth, headers=headers)
+
+        if response.status_code == 200:
+            return jsonify({
+                "status_code":response.status_code
+            })
 
 @api.route('/api/uniparthenope/totalexams/<token>/<matId>', methods=['GET'])
 class TotalExams(Resource):
