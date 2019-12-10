@@ -178,11 +178,21 @@ class TotalExams(Resource):
             }
         response = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/stats", headers=headers)
         _response = response.json()
-        totAdSuperate = _response['numAdSuperate'] + _response['numAdFrequentate']
-        return jsonify({'totAdSuperate': totAdSuperate,
+        test = {}
+
+        if len(_response) != 0:
+            totAdSuperate = _response['numAdSuperate'] + _response['numAdFrequentate']
+            output = jsonify({'totAdSuperate': totAdSuperate,
                         'numAdSuperate': _response['numAdSuperate'],
                         'cfuPar': _response['umPesoSuperato'],
                         'cfuTot': _response['umPesoPiano']})
+        else:
+            output = jsonify({'totAdSuperate': "N/A",
+                            'numAdSuperate': "N/A",
+                            'cfuPar': "N/A",
+                            'cfuTot': "N/A"})
+
+        return output
 
 
 @api.route('/api/uniparthenope/average/<token>/<matId>/<value>', methods=['GET'])
@@ -195,6 +205,12 @@ class TotalExams(Resource):
         response = requests.request("GET", url + "libretto-service-v1/libretti/" + matId + "/medie", headers=headers)
 
         _response = response.json()
+        media_trenta = 0
+        media_centodieci = 0
+        base_trenta = 0
+        base_centodieci = 0
+
+#TODO Da semplificare il return
         for i in range(0,len(_response)):
             if _response[i]['tipoMediaCod']['value'] is value:
                 if _response[i]['base'] == 30:
@@ -203,6 +219,12 @@ class TotalExams(Resource):
                 if _response[i]['base'] == 110:
                     base_centodieci = 110
                     media_centodieci = _response[i]['media']
+
+        if media_trenta is None:
+            media_trenta = "0"
+
+        if media_centodieci is None:
+            media_centodieci = "0"
 
         return jsonify({'trenta': media_trenta,
                             'base_trenta': base_trenta,
