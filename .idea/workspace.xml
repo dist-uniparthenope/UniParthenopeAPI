@@ -167,6 +167,8 @@
       <workItem from="1575713327820" duration="636000" />
       <workItem from="1575905411015" duration="3452000" />
       <workItem from="1576005295955" duration="1495000" />
+      <workItem from="1576866124045" duration="99000" />
+      <workItem from="1576876669793" duration="840000" />
     </task>
     <task id="LOCAL-00020" summary="data update">
       <created>1559057951392</created>
@@ -563,7 +565,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="Update libraries&#10;Anm API orari quasi terminata&#10;bus.py creato" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1576006928363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1576877630655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

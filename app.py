@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from datetime import datetime, timedelta
 import requests
 import json
+import urllib.request, urllib.error, urllib.parse
 
 import os
 UPLOAD_FOLDER = '/files'
@@ -1125,6 +1126,56 @@ class Login(Resource):
             else:
                 return error_response(500, "Impossibile recuperare informazioni Bus")
 
+
+'''
+    INFO PERSONE
+'''
+@api.route('/api/uniparthenope/info/persone/<nome_completo>', methods=['GET'])
+class Login(Resource):
+    def get(self,nome_completo):
+        nome = nome_completo.replace(" ", "+")
+        print(nome)
+
+        prof = {}
+
+        url = 'https://www.uniparthenope.it/rubrica?nome_esteso_1=' + nome
+
+        response = urllib.request.urlopen(url)
+        webContent = response.read()
+
+        parsed = BeautifulSoup(webContent)
+
+        div = parsed.find('div', attrs={'class': 'region region-content'})
+
+        ul = div.find('ul', attrs={'class': 'rubrica-list'})
+        if ul is not None:
+            tel = ul.find('div', attrs={'class': 'views-field views-field-contatto-tfu'})
+            tel_finale = tel.find('span', attrs={'class': 'field-content'})
+
+            email = ul.find('div', attrs={'class': 'views-field views-field-contatto-email'})
+            email_finale = email.find('span', attrs={'class': 'field-content'})
+
+            scheda = ul.find('div', attrs={'class': 'views-field views-field-view-uelement'})
+            scheda_finale = scheda.find('span', attrs={'class': 'field-content'})
+
+            print(email_finale.text.rstrip())
+            print(tel_finale.text)
+            for a in scheda_finale.find_all('a', href=True):
+                print(a['href'])
+
+            prof = {
+                "telefono" : tel_finale,
+                "email" : email_finale,
+                "link" : scheda_finale
+            }
+        else:
+            prof = {
+                "telefono": "",
+                "email": "",
+                "link": ""
+            }
+
+        return jsonify(prof)
 
 from werkzeug.http import HTTP_STATUS_CODES
 
