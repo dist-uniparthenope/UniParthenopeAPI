@@ -1134,16 +1134,12 @@ class Login(Resource):
 class Login(Resource):
     def get(self,nome_completo):
         nome = nome_completo.replace(" ", "+")
-        print(nome)
-
-        prof = {}
-
         url = 'https://www.uniparthenope.it/rubrica?nome_esteso_1=' + nome
 
         response = urllib.request.urlopen(url)
         webContent = response.read()
 
-        parsed = BeautifulSoup(webContent)
+        parsed = BeautifulSoup(webContent, 'html.parser')
 
         div = parsed.find('div', attrs={'class': 'region region-content'})
 
@@ -1158,24 +1154,36 @@ class Login(Resource):
             scheda = ul.find('div', attrs={'class': 'views-field views-field-view-uelement'})
             scheda_finale = scheda.find('span', attrs={'class': 'field-content'})
 
-            print(email_finale.text.rstrip())
-            print(tel_finale.text)
             for a in scheda_finale.find_all('a', href=True):
-                print(a['href'])
+                link = a['href']
 
-            prof = {
-                "telefono" : tel_finale,
-                "email" : email_finale,
-                "link" : scheda_finale
-            }
+            link_pers = str(link).split("/")[-1]
+
+            response = urllib.request.urlopen(link)
+            webContent = response.read()
+
+            parsed = BeautifulSoup(webContent,'html.parser')
+            div = parsed.find('div', attrs={'class': 'views-field views-field-field-ugov-foto'})
+            img = div.find('img', attrs={'class': 'img-responsive'})
+
+
+            prof = ({
+                'telefono' : str(tel_finale.text),
+                'email' : str(email_finale.text.rstrip()),
+                'link' : str(link),
+                'ugov_id' : link_pers,
+                'url_pic' : str(img['src'])
+            })
         else:
-            prof = {
-                "telefono": "",
-                "email": "",
-                "link": ""
-            }
+            prof = ({
+                'telefono': "",
+                'email': "",
+                'link': "",
+                'ugov_id': "",
+                'url_pic': ""
+            })
 
-        return jsonify(prof)
+        return prof
 
 from werkzeug.http import HTTP_STATUS_CODES
 
