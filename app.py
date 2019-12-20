@@ -1180,7 +1180,7 @@ class Login(Resource):
                 'email': "",
                 'link': "",
                 'ugov_id': "",
-                'url_pic': ""
+                'url_pic': "https://www.uniparthenope.it/sites/default/files/styles/fototessera__175x200_/public/default_images/ugov_fotopersona.jpg"
             })
 
         return prof
