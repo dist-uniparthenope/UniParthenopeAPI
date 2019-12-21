@@ -1173,7 +1173,11 @@ class Login(Resource):
         ul = div.find('ul', attrs={'class': 'rubrica-list'})
         if ul is not None:
             tel = ul.find('div', attrs={'class': 'views-field views-field-contatto-tfu'})
-            tel_finale = tel.find('span', attrs={'class': 'field-content'})
+            if tel is not None:
+                tel_f = tel.find('span', attrs={'class': 'field-content'})
+                tel_finale = tel_f.text
+            else:
+                tel_finale = "N/A"
 
             email = ul.find('div', attrs={'class': 'views-field views-field-contatto-email'})
             email_finale = email.find('span', attrs={'class': 'field-content'})
@@ -1195,7 +1199,7 @@ class Login(Resource):
 
 
             prof = ({
-                'telefono' : str(tel_finale.text),
+                'telefono' : str(tel_finale),
                 'email' : str(email_finale.text.rstrip()),
                 'link' : str(link),
                 'ugov_id' : link_pers,
