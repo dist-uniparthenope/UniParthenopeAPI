@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98ae8789-f4e0-4366-8fe2-9fb3802ea81d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,12 +35,12 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="1167" selection-start-line="1167" selection-end-line="1167" />
+            <state relative-caret-position="320">
+              <caret line="499" lean-forward="true" selection-start-line="499" selection-end-line="499" />
               <folding>
                 <element signature="e#0#72#0" expanded="true" />
               </folding>
@@ -68,10 +69,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="86" />
-    <option name="y" value="87" />
+    <option name="x" value="143" />
+    <option name="y" value="90" />
     <option name="width" value="1637" />
-    <option name="height" value="910" />
+    <option name="height" value="909" />
   </component>
   <component name="ProjectId" id="1SbNfIJuyVhxvdhcJxTNkLhXjis" />
   <component name="ProjectLevelVcsManager">
@@ -82,7 +83,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -94,6 +94,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -214,21 +215,8 @@
       <workItem from="1576005295955" duration="1495000" />
       <workItem from="1576866124045" duration="99000" />
       <workItem from="1576876669793" duration="840000" />
-      <workItem from="1576877939426" duration="3553000" />
-    </task>
-    <task id="LOCAL-00020" summary="data update">
-      <created>1559057951392</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1559057951392</updated>
-    </task>
-    <task id="LOCAL-00021" summary="appelli">
-      <created>1559060368415</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1559060368415</updated>
+      <workItem from="1576877939426" duration="3813000" />
+      <workItem from="1576933181461" duration="1846000" />
     </task>
     <task id="LOCAL-00022" summary="appelli">
       <created>1559071824247</created>
@@ -559,36 +547,51 @@
       <option name="project" value="LOCAL" />
       <updated>1574725083347</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="api personaleDocente">
+      <created>1576881513857</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1576881513858</updated>
+    </task>
+    <task id="LOCAL-00070" summary="api personaleDocente">
+      <created>1576881606518</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1576881606518</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3553000" />
+    <option name="totallyTimeSpent" value="5659000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="86" y="87" width="1637" height="910" extended-state="0" />
+    <frame x="143" y="90" width="1637" height="909" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24984147" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25301206" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32947233" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32860824" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +635,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Login ok" />
     <MESSAGE value="libretto api" />
     <MESSAGE value="medie" />
     <MESSAGE value="session" />
@@ -657,17 +659,18 @@
     <MESSAGE value="bug fixed" />
     <MESSAGE value="anm" />
     <MESSAGE value="Update libraries&#10;Anm API orari quasi terminata&#10;bus.py creato" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update libraries&#10;Anm API orari quasi terminata&#10;bus.py creato" />
+    <MESSAGE value="api personaleDocente" />
+    <option name="LAST_COMMIT_MESSAGE" value="api personaleDocente" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1576880731908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1576934373936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="1167" selection-start-line="1167" selection-end-line="1167" />
+        <state relative-caret-position="320">
+          <caret line="499" lean-forward="true" selection-start-line="499" selection-end-line="499" />
           <folding>
             <element signature="e#0#72#0" expanded="true" />
           </folding>

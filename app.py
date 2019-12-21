@@ -476,6 +476,33 @@ class CurrentAA(Resource):
                         })
 
 
+@api.route('/api/uniparthenope/getDocenti/<aaId>/<cdsId>', methods=['GET'])
+class CurrentAA(Resource):
+    def get(self, aaId, cdsId):
+        headers = {
+            'Content-Type': "application/json"
+        }
+        response = requests.request("GET", url + "offerta-service-v1/offerte/" + aaId + "/" + cdsId + "/docentiPerUD", headers=headers)
+        _response = response.json()
+        array = []
+
+        if response.status_code == 200:
+            for i in range(0, len(_response)):
+                item = ({
+                    'docenteNome': _response[i]['docenteNome'],
+                    'docenteCognome': _response[i]['docenteCognome'],
+                    'docenteId':_response[i]['docenteId'],
+                    'docenteMat': _response[i]['docenteMatricola'],
+                    'corso': _response[i]['chiaveUdContestualizzata']['chiaveAdContestualizzata']['adDes'],
+                    'adId': _response[i]['chiaveUdContestualizzata']['chiaveAdContestualizzata']['adId']
+                })
+                array.append(item)
+
+        return array
+
+
+
+
 from dateutil import tz
 @api.route('/api/uniparthenope/segreteria', methods=['GET'])
 class CurrentAA(Resource):
