@@ -1153,6 +1153,49 @@ class Login(Resource):
             else:
                 return error_response(500, "Impossibile recuperare informazioni Bus")
 
+'''
+    DOCENTI
+'''
+@api.route('/api/uniparthenope/docenti/getCourses/<token>/<auth>/<aaId>', methods=['GET'])
+class Docenti(Resource):
+    def get(self, token, auth, aaId):
+        headers = {
+            'Content-Type': "application/json",
+            "Authorization": "Basic " + token
+        }
+        response = requests.request("GET",
+                url + "calesa-service-v1/abilitazioni" + "/;jsessionid=" + auth,
+                headers=headers)
+        array = []
+
+        if response.status_code is 200:
+            _response = response.json()
+            for x in range(0, len(_response)):
+
+                if _response[x]['aaAbilDocId'] == int(aaId):
+                    response2 = requests.request("GET",
+                                                url + "offerta-service-v1/offerte/" + aaId + "/" + str(_response[x]['cdsId']) + "/segmenti?adId=" + str(_response[x]['adId'])+ "&order=-aaOrdId",
+                                                headers=headers)
+                    if response2.status_code is 200:
+                        _response2 = response2.json()
+
+                        item = ({
+                            'adDes': _response2[0]['chiaveSegContestualizzato']['chiaveUdContestualizzata']['chiaveAdContestualizzata']['adDes'],
+                            'adId': _response[x]['adId'],
+                            'cdsDes': _response2[0]['chiaveSegContestualizzato']['chiaveUdContestualizzata'][
+                                'chiaveAdContestualizzata']['cdsDes'],
+                            'cdsId': _response[x]['cdsId'],
+                            'adDefAppCod': _response[x]['adDefAppCod'],
+                            'cfu': _response2[0]['peso'],
+                            'durata': _response2[0]['durUniVal'],
+                            'obbligatoria': _response2[0]['freqObbligFlg'],
+                            'libera': _response2[0]['liberaOdFlg'],
+                            'tipo': _response2[0]['tipoAfCod']['value'],
+                            'settCod': _response2[0]['settCod']
+                        })
+                        array.append(item)
+            return array
+
 
 '''
     INFO PERSONE
