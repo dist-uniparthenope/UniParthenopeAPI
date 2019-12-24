@@ -1178,22 +1178,33 @@ class Docenti(Resource):
                                                 headers=headers)
                     if response2.status_code is 200:
                         _response2 = response2.json()
+                        response3 = requests.request("GET",
+                                                     url + "logistica-service-v1/logistica?aaOffId="+aaId+"&adId=" + str(
+                                                         _response[x]['adId']),
+                                                        headers=headers)
+                        if response3.status_code is 200:
+                            _response3 = response3.json()
 
-                        item = ({
-                            'adDes': _response2[0]['chiaveSegContestualizzato']['chiaveUdContestualizzata']['chiaveAdContestualizzata']['adDes'],
-                            'adId': _response[x]['adId'],
-                            'cdsDes': _response2[0]['chiaveSegContestualizzato']['chiaveUdContestualizzata'][
-                                'chiaveAdContestualizzata']['cdsDes'],
-                            'cdsId': _response[x]['cdsId'],
-                            'adDefAppCod': _response[x]['adDefAppCod'],
-                            'cfu': _response2[0]['peso'],
-                            'durata': _response2[0]['durUniVal'],
-                            'obbligatoria': _response2[0]['freqObbligFlg'],
-                            'libera': _response2[0]['liberaOdFlg'],
-                            'tipo': _response2[0]['tipoAfCod']['value'],
-                            'settCod': _response2[0]['settCod']
-                        })
-                        array.append(item)
+                            item = ({
+                                'adDes': _response3[0]['chiaveADFisica']['adDes'],
+                                'adId': _response[x]['adId'],
+                                'cdsDes': _response3[0]['chiaveADFisica']['cdsDes'],
+                                'cdsId': _response[x]['cdsId'],
+                                'adDefAppCod': _response[x]['adDefAppCod'],
+                                'cfu': _response2[0]['peso'],
+                                'durata': _response2[0]['durUniVal'],
+                                'obbligatoria': _response2[0]['freqObbligFlg'],
+                                'libera': _response2[0]['liberaOdFlg'],
+                                'tipo': _response2[0]['tipoAfCod']['value'],
+                                'settCod': _response2[0]['settCod'],
+                                'semCod': _response3[0]['chiavePartizione']['partCod'],
+                                'semDes': _response3[0]['chiavePartizione']['partDes'],
+                                'inizio': _response3[0]['dataInizio'].split()[0],
+                                'fine': _response3[0]['dataFine'].split()[0],
+                                'ultMod': _response3[0]['dataModLog'].split()[0],
+                                'sede': _response3[0]['sedeDes']
+                            })
+                            array.append(item)
             return array
 
 
