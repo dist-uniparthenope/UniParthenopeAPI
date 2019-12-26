@@ -1207,21 +1207,31 @@ class Docenti(Resource):
                             array.append(item)
             return array
 
-@api.route('/api/uniparthenope/docenti/getAA/<token>/<auth>', methods=['GET'])
+@api.route('/api/uniparthenope/getSession', methods=['GET'])
 class Docenti(Resource):
-    def get(self, token, auth):
-        headers = {
-            'Content-Type': "application/json",
-            "Authorization": "Basic " + token
-        }
+    def get(self):
         response = requests.request("GET",
-                url + "calesa-service-v1/abilitazioni?order=-aaAbilDocId",
-                headers=headers)
+                url + "calesa-service-v1/sessioni?order=-aaSesId")
+        today = (datetime.today() + timedelta(1*365/12))
 
         if response.status_code is 200:
             _response = response.json()
 
-            return _response[0]['aaAbilDocId']
+            for i in range(0, len(_response)):
+
+                inizio = datetime.strptime(_response[i]['dataInizio'], "%d/%m/%Y %H:%M:%S")
+                fine = datetime.strptime(_response[i]['dataFine'], "%d/%m/%Y %H:%M:%S")
+                if inizio <= datetime.today() <= fine:
+                    array = ({
+                        'aa_curr': str(inizio.year) + " - " + str(fine.year),
+                        'semId': _response[i]['sesId'],
+                        'semDes': _response[i]['des'],
+                        'aaId': _response[i]['aaSesId'],
+                    })
+                    if i > 0:
+                        break
+
+            return array
 
 
 '''
