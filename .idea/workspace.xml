@@ -39,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
-              <caret line="1181" column="108" selection-start-line="1181" selection-start-column="108" selection-end-line="1181" selection-end-column="108" />
+            <state relative-caret-position="157">
+              <caret line="1217" column="74" lean-forward="true" selection-start-line="1217" selection-start-column="74" selection-end-line="1217" selection-end-column="74" />
               <folding>
                 <element signature="e#0#72#0" expanded="true" />
               </folding>
@@ -75,8 +75,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="138" />
-    <option name="y" value="97" />
+    <option name="x" value="23" />
+    <option name="y" value="153" />
     <option name="width" value="1637" />
     <option name="height" value="909" />
   </component>
@@ -224,14 +224,8 @@
       <workItem from="1576877939426" duration="3813000" />
       <workItem from="1576933181461" duration="5385000" />
       <workItem from="1577180320527" duration="3877000" />
-      <workItem from="1577188917338" duration="1705000" />
-    </task>
-    <task id="LOCAL-00025" summary="newLibretto">
-      <created>1559082356600</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1559082356600</updated>
+      <workItem from="1577188917338" duration="2738000" />
+      <workItem from="1577355117672" duration="625000" />
     </task>
     <task id="LOCAL-00026" summary="newLibretto">
       <created>1559082485724</created>
@@ -569,17 +563,24 @@
       <option name="project" value="LOCAL" />
       <updated>1577184036074</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="corsi docente">
+      <created>1577191693190</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1577191693191</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14780000" />
+    <option name="totallyTimeSpent" value="16438000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="138" y="97" width="1637" height="909" extended-state="0" />
+    <frame x="23" y="153" width="1637" height="909" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2593532" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26252377" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -671,14 +672,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="corsi docente" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1577190024245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1577355741513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="1181" column="108" selection-start-line="1181" selection-start-column="108" selection-end-line="1181" selection-end-column="108" />
+        <state relative-caret-position="157">
+          <caret line="1217" column="74" lean-forward="true" selection-start-line="1217" selection-start-column="74" selection-end-line="1217" selection-end-column="74" />
           <folding>
             <element signature="e#0#72#0" expanded="true" />
           </folding>

@@ -1207,6 +1207,22 @@ class Docenti(Resource):
                             array.append(item)
             return array
 
+@api.route('/api/uniparthenope/docenti/getAA/<token>/<auth>', methods=['GET'])
+class Docenti(Resource):
+    def get(self, token, auth):
+        headers = {
+            'Content-Type': "application/json",
+            "Authorization": "Basic " + token
+        }
+        response = requests.request("GET",
+                url + "calesa-service-v1/abilitazioni?order=-aaAbilDocId",
+                headers=headers)
+
+        if response.status_code is 200:
+            _response = response.json()
+
+            return _response[0]['aaAbilDocId']
+
 
 '''
     INFO PERSONE
