@@ -1228,6 +1228,7 @@ class Docenti(Resource):
                         'semDes': _response[i]['des'],
                         'aaId': _response[i]['aaSesId'],
                     })
+
                     if i > 0:
                         break
 
