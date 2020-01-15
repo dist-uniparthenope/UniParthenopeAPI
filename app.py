@@ -429,6 +429,46 @@ class CurrentAA(Resource):
         else:
             return jsonify({'prenotato': False})
 
+@api.route('/api/uniparthenope/getPrenotazioni/<token>/<matId>/<auth>', methods=['GET'])
+class CurrentAA(Resource):
+    def get(self, token, matId, auth):
+        headers = {
+            'Content-Type': "application/json",
+            "Authorization": "Basic " + token
+        }
+        response = requests.request("GET", url + "calesa-service-v1/prenotazioni/" + matId + "/;jsessionid=" + auth, headers=headers)
+        _response = response.json()
+        array = []
+        print(_response)
+        for i in range(0, len(_response)):
+            response2 = requests.request("GET", url + "calesa-service-v1/appelli/" + str(_response[i]['cdsId']) +"/" +
+                                         str(_response[i]['adId']) + "/" + str(_response[i]['appId']) + "/;jsessionid=" + auth,
+                                        headers=headers)
+            _response2 = response2.json()
+            for x in range(0,len(_response2['turni'])):
+                if _response2['turni'][x]['appLogId'] == _response[i]['appLogId']:
+                    item = ({
+                        'nome_pres' : _response2['presidenteNome'],
+                        'cognome_pres': _response2['presidenteCognome'],
+                        'numIscritti': _response2['numIscritti'],
+                        'note': _response2['note'],
+                        'statoDes': _response2['statoDes'],
+                        'statoEsito': _response2['statoInsEsiti']['value'],
+                        'statoVerb': _response2['statoVerb']['value'],
+                        'statoPubbl': _response2['statoPubblEsiti']['value'],
+                        'tipoApp': _response2['tipoGestAppDes'],
+                        'aulaId' : _response2['turni'][x]['aulaId'],
+                        'edificioId': _response2['turni'][x]['edificioCod'],
+                        'edificioDes': _response2['turni'][x]['edificioDes'],
+                        'aulaDes': _response2['turni'][x]['aulaDes'],
+                        'desApp': _response2['turni'][x]['des'],
+                        'dataEsa': _response2['turni'][x]['dataOraEsa']
+                    })
+                    array.append(item)
+
+
+        return array
+
 
 @api.route('/api/uniparthenope/RecentAD/<adId>', methods=['GET'])
 class CurrentAA(Resource):
@@ -1152,6 +1192,7 @@ class Login(Resource):
 
             else:
                 return error_response(500, "Impossibile recuperare informazioni Bus")
+
 
 '''
     DOCENTI
