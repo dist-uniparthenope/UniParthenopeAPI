@@ -34,3 +34,14 @@ class Food(db.Model):
 
     def __repr__(self):
         return '<Primo piatto {}>'.format(self.nome) + '<Id {}>'.format(self.id)
+
+
+class Building(db.Model):
+    id_corso = db.Column(db.Integer, primary_key=True)
+    struttura_des = db.Column(db.String(120))
+    struttura_id = db.Column(db.String(10))
+    struttura_ga_id = db.Column(db.Integer)
+    corso_ga_id = db.Column(db.String(10))
+
+    def __repr__(self):
+        return '<Id Corso {}>'.format(self.id_corso)
