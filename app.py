@@ -4,8 +4,8 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime, timedelta
+
 import requests
-import json
 import urllib.request, urllib.error, urllib.parse
 
 import os
@@ -17,8 +17,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-import models
-
+from models import Building
 
 class BaseConfig(object):
     DATA_FOLDER="data_folder"
@@ -42,7 +41,7 @@ api = Api(app)
 
 
 @api.route('/api/uniparthenope/status', methods=['GET'])
-class Login(Resource):
+class Status(Resource):
     def get(self):
         ga_sc = requests.request("GET", "http://ga.uniparthenope.it", timeout=30).status_code
         esse3_sc = requests.request("GET", "https://uniparthenope.esse3.cineca.it", timeout=30).status_code
@@ -73,7 +72,7 @@ class Login(Resource):
 
 
 @api.route('/api/uniparthenope/admin/<token>/allUsers', methods=['GET'])
-class Login(Resource):
+class Admin(Resource):
     def get(self, token):
 
         array = []
@@ -94,7 +93,7 @@ class Login(Resource):
 
 
 @api.route('/api/uniparthenope/admin/addUser/<username>/<password>/<email>/<nomeLocale>/<token>', methods=['POST'])
-class Login(Resource):
+class Admin(Resource):
     def post(self, username, password, email, nomeLocale, token):
         tok = User.query.filter_by(token=token).first()
         if tok is not None and tok.username == "admin":
@@ -113,8 +112,9 @@ class Login(Resource):
         else:
             return error_response(500, "You are not admin!")
 
+
 @api.route('/api/uniparthenope/admin/<token>/deleteUser/<id>', methods=['GET'])
-class Login(Resource):
+class Admin(Resource):
     def get(self, token, id):
 
         tok = User.query.filter_by(token=token).first()
@@ -152,11 +152,31 @@ class Login(Resource):
                     return jsonify({'statusCode': 600, 'username': tok.nome_bar})
         else:
             print('Auth Stu/Doc')
-            print(response.json())
-            return jsonify({'response': response.json()})
+            r = response.json()
+
+            if r['user']['grpDes'] == "Docenti":
+                return jsonify({'response': response.json()})
+
+            else:
+                for i in range(0,len(r['user']['trattiCarriera'])):
+                    id = Building.query.filter_by(id_corso=r['user']['trattiCarriera'][i]['cdsId']).first()
+                    if id is not None:
+                        r["user"]["trattiCarriera"][i]["strutturaDes"] = id.struttura_des
+                        r["user"]["trattiCarriera"][i]["strutturaId"] = id.struttura_id
+                        r["user"]["trattiCarriera"][i]["strutturaGaId"] = id.struttura_ga_id
+                        r["user"]["trattiCarriera"][i]["corsoGaId"] = id.corso_ga_id
+                    else:
+                        r["user"]["trattiCarriera"][i]["strutturaDes"] = ""
+                        r["user"]["trattiCarriera"][i]["strutturaId"] = ""
+                        r["user"]["trattiCarriera"][i]["strutturaGaId"] = ""
+                        r["user"]["trattiCarriera"][i]["corsoGaId"] = ""
+
+                print(r)
+                return jsonify({'response': r})
+
 
 @api.route('/api/uniparthenope/logout/<token>/<auth>',methods=['GET'])
-class Logout(Resource):
+class Login(Resource):
     def get(self, token, auth):
         headers = {
             'Content-Type': "application/json",
@@ -168,6 +188,7 @@ class Logout(Resource):
             return jsonify({
                 "status_code":response.status_code
             })
+
 
 @api.route('/api/uniparthenope/totalexams/<token>/<matId>', methods=['GET'])
 class TotalExams(Resource):
@@ -197,7 +218,7 @@ class TotalExams(Resource):
 
 
 @api.route('/api/uniparthenope/average/<token>/<matId>/<value>', methods=['GET'])
-class TotalExams(Resource):
+class Average(Resource):
     def get(self, token, matId, value):
         headers = {
             'Content-Type': "application/json",
@@ -282,7 +303,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/pianoId/<token>/<stuId>/<auth>', methods=['GET'])
-class CurrentAA(Resource):
+class PianoId(Resource):
     def get(self, token, stuId, auth):
         headers = {
             'Content-Type': "application/json",
@@ -296,7 +317,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/exams/<token>/<stuId>/<pianoId>/<auth>', methods=['GET'])
-class CurrentAA(Resource):
+class Exams(Resource):
     def get(self, token, stuId, pianoId, auth):
         headers = {
             'Content-Type': "application/json",
@@ -326,7 +347,7 @@ class CurrentAA(Resource):
         return jsonify(my_exams)
 
 @api.route('/api/uniparthenope/checkExam/<token>/<matId>/<examId>/<auth>', methods=['GET'])
-class CurrentAA(Resource):
+class CheckExam(Resource):
     def get(self, token, matId, examId, auth):
         headers = {
             'Content-Type': "application/json",
@@ -377,7 +398,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/checkAppello/<token>/<cdsId>/<adId>', methods=['GET'])
-class CurrentAA(Resource):
+class CheckAppello(Resource):
     def get(self, token, cdsId, adId):
         headers = {
             'Content-Type': "application/json",
@@ -410,7 +431,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/checkPrenotazione/<token>/<cdsId>/<adId>/<appId>/<stuId>', methods=['GET'])
-class CurrentAA(Resource):
+class CheckPrenotazione(Resource):
     def get(self, token, cdsId, adId, appId, stuId):
         headers = {
             'Content-Type': "application/json",
@@ -430,7 +451,7 @@ class CurrentAA(Resource):
             return jsonify({'prenotato': False})
 
 @api.route('/api/uniparthenope/getPrenotazioni/<token>/<matId>/<auth>', methods=['GET'])
-class CurrentAA(Resource):
+class getPrenotazioni(Resource):
     def get(self, token, matId, auth):
         headers = {
             'Content-Type': "application/json",
@@ -471,7 +492,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/RecentAD/<adId>', methods=['GET'])
-class CurrentAA(Resource):
+class RecentAD(Resource):
     def get(self, adId):
         headers = {
             'Content-Type': "application/json"
@@ -497,7 +518,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/infoCourse/<adLogId>', methods=['GET'])
-class CurrentAA(Resource):
+class InfoCourse(Resource):
     def get(self, adLogId):
         headers = {
             'Content-Type': "application/json"
@@ -517,7 +538,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/getDocenti/<aaId>/<cdsId>', methods=['GET'])
-class CurrentAA(Resource):
+class getDocenti(Resource):
     def get(self, aaId, cdsId):
         headers = {
             'Content-Type': "application/json"
@@ -541,11 +562,9 @@ class CurrentAA(Resource):
         return array
 
 
-
-
 from dateutil import tz
 @api.route('/api/uniparthenope/segreteria', methods=['GET'])
-class CurrentAA(Resource):
+class Segreteria(Resource):
     def get(self):
         studenti = [{'giorno': "LUN", 'orario_inizio': "09:00", 'orario_fine': "12:00"},
                     {'giorno': "MAR", 'orario_inizio': "09:00 - 12:30", 'orario_fine': "14:00 - 15.30"},
@@ -639,7 +658,7 @@ class CurrentAA(Resource):
 
 
 @api.route('/api/uniparthenope/examsToFreq/<token>/<stuId>/<pianoId>/<matId>/<auth>', methods=['GET'])
-class CurrentAA(Resource):
+class ExamsToFreq(Resource):
      def get(self, token, stuId, pianoId, matId, auth):
         headers = {
             'Content-Type': "application/json",
@@ -748,7 +767,7 @@ import base64
 
 
 @api.route('/api/uniparthenope/foods/register/<username>/<password>/<email>/<nomeLocale>/<pwd_admin>', methods=['POST'])
-class Login(Resource):
+class Food(Resource):
     def post(self, username, password, email, nomeLocale, pwd_admin):
         if pwd_admin == "besteming":
             usern = User.query.filter_by(username=username).first()
@@ -767,7 +786,7 @@ class Login(Resource):
             return error_response(500, "You are not admin!")
 
 @api.route('/api/uniparthenope/foods/getToken/<username>/<pwd_admin>', methods=['GET'])
-class Login(Resource):
+class Food(Resource):
     def get(self, username, pwd_admin):
         if pwd_admin == "besteming":
             usern = User.query.filter_by(username=username).first()
@@ -782,7 +801,7 @@ class Login(Resource):
 
 from flask import request
 @api.route('/api/uniparthenope/foods/addMenu/<token>', methods=['POST'])
-class Login(Resource):
+class Food(Resource):
     def post(self, token):
         content = request.json
         usern = User.query.filter_by(token=token).first()
@@ -815,7 +834,7 @@ class Login(Resource):
             return error_response(500, "You are not admin!")
 
 @api.route('/api/uniparthenope/foods/removeMenu/<token>/<id>', methods=['GET'])
-class Login(Resource):
+class Food(Resource):
     def get(self, token, id):
         usern = User.query.filter_by(token=token).first()
         if usern is not None:
@@ -831,7 +850,7 @@ class Login(Resource):
             return error_response(500, "Not admin!")
 
 @api.route('/api/uniparthenope/foods/menuSearchData/<data>', methods=['GET'])
-class Login(Resource):
+class Food(Resource):
     def get(self, data):
 
         array = []
@@ -853,7 +872,7 @@ class Login(Resource):
         return jsonify(array)
 
 @api.route('/api/uniparthenope/foods/menuSearchUser_Today/<nome_bar>', methods=['GET'])
-class Login(Resource):
+class Food(Resource):
     def get(self, nome_bar):
 
         array = []
@@ -877,7 +896,7 @@ class Login(Resource):
 
 
 @api.route('/api/uniparthenope/foods/getAllNames', methods=['GET'])
-class Login(Resource):
+class Food(Resource):
     def get(self):
         array = []
 
@@ -889,7 +908,7 @@ class Login(Resource):
 
 
 @api.route('/api/uniparthenope/foods/getAllToday', methods=['GET'])
-class Login(Resource):
+class Food(Resource):
     def get(self):
 
         array = []
@@ -917,7 +936,7 @@ class Login(Resource):
         return jsonify(array)
 
 @api.route('/api/uniparthenope/foods/menuSearchUser/<nome_bar>', methods=['GET'])
-class Login(Resource):
+class Food(Resource):
     def get(self, nome_bar):
 
         array = []
@@ -957,7 +976,7 @@ import urllib.request
 import io
 
 @api.route('/api/uniparthenope/orari/cercaCorso/<nome_corso>/<nome_prof>/<nome_studio>/<periodo>', methods=['GET'])
-class Login(Resource):
+class CercaCorso(Resource):
     def get(self, nome_corso, nome_prof, nome_studio, periodo):
         end_date = datetime.now() + timedelta(days=int(periodo)*365/12)
 
@@ -1003,7 +1022,7 @@ class Login(Resource):
 
 
 @api.route('/api/uniparthenope/orari/altriCorsi/<periodo>', methods=['GET'])
-class Login(Resource):
+class AltriCorsi(Resource):
     def get(self, periodo):
         end_date = datetime.now() + timedelta(days=int(periodo) * 365 / 12)
 
@@ -1071,7 +1090,7 @@ ANM
 from bs4 import BeautifulSoup
 from bus import glob
 @api.route('/api/uniparthenope/anm/orari/<sede>', methods=['GET'])
-class Login(Resource):
+class ANM(Resource):
     def get(self,sede):
         url_anm = "http://www.anm.it/infoclick/infoclick.php"
         page = urllib.request.urlopen(url_anm)
@@ -1147,7 +1166,7 @@ class Login(Resource):
 
 
 @api.route('/api/uniparthenope/anm/bus/<sede>', methods=['GET'])
-class Login(Resource):
+class ANM(Resource):
     def get(self,sede):
         url_anm = "http://www.anm.it/infoclick/infoclick.php"
         page = urllib.request.urlopen(url_anm)
@@ -1280,7 +1299,7 @@ class Docenti(Resource):
     INFO PERSONE
 '''
 @api.route('/api/uniparthenope/info/persone/<nome_completo>', methods=['GET'])
-class Login(Resource):
+class InfoPersone(Resource):
     def get(self,nome_completo):
         nome = nome_completo.replace(" ", "+")
         url = 'https://www.uniparthenope.it/rubrica?nome_esteso_1=' + nome
