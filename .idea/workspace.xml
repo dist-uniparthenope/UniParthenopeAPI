@@ -80,6 +80,18 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -150,6 +162,7 @@
       <workItem from="1579701713796" duration="989000" />
       <workItem from="1579702731398" duration="5445000" />
       <workItem from="1579717910993" duration="2234000" />
+      <workItem from="1579737582741" duration="991000" />
     </task>
     <task id="LOCAL-00029" summary="infoCorsi">
       <created>1559119918410</created>
@@ -565,34 +578,34 @@
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="507" y="200" key="FileChooserDialogImpl/0.23.1440.831@0.23.1440.831" timestamp="1579121694849" />
-    <state width="1398" height="236" key="GridCell.Tab.0.bottom" timestamp="1579720223742">
-      <screen x="0" y="23" width="1440" height="812" />
+    <state width="1255" height="201" key="GridCell.Tab.0.bottom" timestamp="1579739698854">
+      <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state width="1398" height="236" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1579720223742" />
     <state width="1398" height="236" key="GridCell.Tab.0.bottom/0.23.1440.814@0.23.1440.814" timestamp="1579719877109" />
     <state width="1398" height="236" key="GridCell.Tab.0.bottom/0.23.1440.816@0.23.1440.816" timestamp="1579718710769" />
-    <state width="1255" height="201" key="GridCell.Tab.0.bottom/0.23.1440.831@0.23.1440.831" timestamp="1579127903077" />
-    <state width="1398" height="236" key="GridCell.Tab.0.center" timestamp="1579720223741">
-      <screen x="0" y="23" width="1440" height="812" />
+    <state width="1255" height="201" key="GridCell.Tab.0.bottom/0.23.1440.831@0.23.1440.831" timestamp="1579739698854" />
+    <state width="1255" height="201" key="GridCell.Tab.0.center" timestamp="1579739698854">
+      <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state width="1398" height="236" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1579720223741" />
     <state width="1398" height="236" key="GridCell.Tab.0.center/0.23.1440.814@0.23.1440.814" timestamp="1579719877109" />
     <state width="1398" height="236" key="GridCell.Tab.0.center/0.23.1440.816@0.23.1440.816" timestamp="1579718710768" />
-    <state width="1255" height="201" key="GridCell.Tab.0.center/0.23.1440.831@0.23.1440.831" timestamp="1579127903077" />
-    <state width="1398" height="236" key="GridCell.Tab.0.left" timestamp="1579720223740">
-      <screen x="0" y="23" width="1440" height="812" />
+    <state width="1255" height="201" key="GridCell.Tab.0.center/0.23.1440.831@0.23.1440.831" timestamp="1579739698854" />
+    <state width="1255" height="201" key="GridCell.Tab.0.left" timestamp="1579739698853">
+      <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state width="1398" height="236" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1579720223740" />
     <state width="1398" height="236" key="GridCell.Tab.0.left/0.23.1440.814@0.23.1440.814" timestamp="1579719877109" />
     <state width="1398" height="236" key="GridCell.Tab.0.left/0.23.1440.816@0.23.1440.816" timestamp="1579718710767" />
-    <state width="1255" height="201" key="GridCell.Tab.0.left/0.23.1440.831@0.23.1440.831" timestamp="1579127903076" />
-    <state width="1398" height="236" key="GridCell.Tab.0.right" timestamp="1579720223741">
-      <screen x="0" y="23" width="1440" height="812" />
+    <state width="1255" height="201" key="GridCell.Tab.0.left/0.23.1440.831@0.23.1440.831" timestamp="1579739698853" />
+    <state width="1255" height="201" key="GridCell.Tab.0.right" timestamp="1579739698854">
+      <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state width="1398" height="236" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1579720223741" />
     <state width="1398" height="236" key="GridCell.Tab.0.right/0.23.1440.814@0.23.1440.814" timestamp="1579719877109" />
     <state width="1398" height="236" key="GridCell.Tab.0.right/0.23.1440.816@0.23.1440.816" timestamp="1579718710769" />
-    <state width="1255" height="201" key="GridCell.Tab.0.right/0.23.1440.831@0.23.1440.831" timestamp="1579127903077" />
+    <state width="1255" height="201" key="GridCell.Tab.0.right/0.23.1440.831@0.23.1440.831" timestamp="1579739698854" />
     <state x="221" y="77" key="SettingsEditor" timestamp="1579121711370">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
@@ -603,7 +616,7 @@
     <state x="397" y="271" key="com.intellij.ide.util.TipDialog/0.23.1440.831@0.23.1440.831" timestamp="1579121433174" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1579720223727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UniParthenopeAPI_new$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1560363519462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/UniParthenopeAPI$UniParthenopeAPI.coverage" NAME="UniParthenopeAPI Coverage Results" MODIFIED="1579739698832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
